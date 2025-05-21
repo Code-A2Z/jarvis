@@ -13,13 +13,15 @@ def fetch_location_from_ip(ip_address):
       "Country": data.get("country", "N/A"),
       "Latitude": data.get("lat", "N/A"),
       "Longitude": data.get("lon", "N/A"),
-      "ISP": data.get("isp", "N/A"),
+      "ORG": data.get("org", "N/A"),
+      "ZIP": data.get("zip", "N/A"),
+      "Timezone": data.get("timezone", "N/A"),
     }
   return None
 
 def locationSearch():
   st.info("Enter an IP address to find its location.", icon="ℹ️")
-  ip_address = st.text_input("Enter an IP address", placeholder="e.g., 57.49.176.72")
+  ip_address = st.text_input("Enter an IP address", placeholder="e.g., 54.49.176.72")
 
   if st.button("Find Location") and ip_address:
     with st.spinner("Fetching Location..."):
@@ -31,9 +33,11 @@ def locationSearch():
         st.metric(label="City", value=location_info["City"])
         st.metric(label="Region", value=location_info["Region"])
         st.metric(label="Country", value=location_info["Country"])
+        st.metric(label="ZIP", value=location_info["ZIP"])
       with col2:
+        st.metric(label="Timezone", value=location_info["Timezone"])
         st.metric(label="Latitude", value=location_info["Latitude"])
         st.metric(label="Longitude", value=location_info["Longitude"])
-        st.metric(label="ISP", value=location_info["ISP"])
+        st.metric(label="Organization", value=location_info["ORG"])
     else:
       st.error("❌ Could not fetch location. Try another IP!")
