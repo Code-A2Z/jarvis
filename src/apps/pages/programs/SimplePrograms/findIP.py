@@ -1,58 +1,30 @@
 import streamlit as st
-import streamlit.components.v1 as components
+import requests
+import pyperclip
 
-def fetch_ip_address(url, ip_type):
-    ip_script = f"""
-    <style>
-        .styled-button {{
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 10px;
-        }}
-        .styled-button:hover {{
-            background-color: rgba(255, 255, 255, 0.3);
-        }} 
-    </style>
-    <script>
-        fetch('{url}')
-        .then(response => response.json())
-        .then(data => {{
-            document.getElementById("ip_display").innerText = data.ip;
-        }})
-        .catch(err => {{
-            console.error("Error fetching IP:", err);
-            document.getElementById("ip_display").innerText = "Failed to fetch IP.";
-        }});
-    </script>
-    <div style="border:none; width:300px; display:flex; align-items:center; height: 20px;">
-        <p style="font-size:20px; color:#FFFFFF; margin-right:10px;">{ip_type}: </p>
-        <p id="ip_display" style="font-size:20px; color:#32ca5b;">Fetching IP...</p>
-        <button class="styled-button" id="styled-button" onclick="copyIP()">Copy</button>
-    </div>
-    <script>
-        function copyIP() {{
-            document.getElementById("styled-button").innerText = 'Copied';
-            let ip = document.getElementById("ip_display").innerText;
-            navigator.clipboard.writeText(ip);
-            setTimeout(() => {{
-                document.getElementById("styled-button").innerText = 'Copy';
-            }}, 1000);
-        }}
-    </script>
-    """
-    return ip_script
-
+def get_ip(url):
+  try:
+    response = requests.get(url, timeout=5)
+    response.raise_for_status()
+    return response.json().get("ip", "N/A")
+  except Exception as e:
+    return f"Error: {e}"
 
 def findIP():
-    st.title("Your Public IP Address")
+  st.title("🌏 Your Public IP Addresses")
 
-    ipv4 = fetch_ip_address('https://api.ipify.org?format=json', 'IPV4')
-    components.html(ipv4, height=40)
+  ipv4 = get_ip('https://api.ipify.org?format=json')
+  ipv6 = get_ip('https://api64.ipify.org?format=json')
 
-    ipv6 = fetch_ip_address('https://api64.ipify.org?format=json', 'IPV6')
-    components.html(ipv6, height=40)
+  col1, col2 = st.columns(2)
+  with col1:
+    st.metric(label="IPV4", value=ipv4)
+    if st.button("Copy IPV4"):
+      pyperclip.copy(ipv4)
+      st.success("Copied IPV4 to clipboard!", icon="✅")
+
+  with col2:
+    st.metric(label="IPV6", value=ipv6)
+    if st.button("Copy IPV6"):
+      pyperclip.copy(ipv6)
+      st.success("Copied IPV6 to clipboard!", icon="✅")
