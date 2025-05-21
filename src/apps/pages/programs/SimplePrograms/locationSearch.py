@@ -40,4 +40,4 @@ def locationSearch():
         st.metric(label="Longitude", value=location_info["Longitude"])
         st.metric(label="Organization", value=location_info["ORG"])
     else:
-      st.error("❌ Could not fetch location. Try another IP!")
+      st.error("Could not fetch location. Try another IP!", icon="❌")
