@@ -2,80 +2,49 @@ import streamlit as st
 import datetime
 import time
 
-def check_alarm():
-    alarm_time = st.session_state.alarm_time
-    snooze_time = st.session_state.snooze_time
-    alarm_message = st.session_state.alarm_message
-    alarm_note = st.session_state.alarm_note
-    while True:
-        current_time = datetime.datetime.now().strftime("%H:%M:%S")
-        if current_time == alarm_time:
-            st.session_state.alarm_triggered = True
-            st.session_state.alarm_message = alarm_message
-            st.session_state.alarm_note = alarm_note
-            break
-
-        if st.session_state.snooze_triggered:
-            snooze_alarm_time = (datetime.datetime.now() + datetime.timedelta(minutes=snooze_time)).strftime("%H:%M:%S")
-            if current_time == snooze_alarm_time:
-                st.session_state.alarm_triggered = True
-                st.session_state.alarm_message = alarm_message
-                st.session_state.alarm_note = alarm_note
-                st.session_state.snooze_triggered = False
-                break
-
-        time.sleep(1)
-
 def alarm():
-    st.title("Alarm Clock")
+  col1, col2, col3 = st.columns(3)
+  with col1:
+    hour = st.number_input("Hour", min_value=0, max_value=23, key="hour")
+  with col2:
+    minute = st.number_input("Minute", min_value=0, max_value=59, key="minute")
+  with col3:
+    second = st.number_input("Second", min_value=0, max_value=59, key="second")
 
-    if 'alarm_triggered' not in st.session_state:
-        st.session_state.alarm_triggered = False
-    if 'snooze_triggered' not in st.session_state:
-        st.session_state.snooze_triggered = False
-    if 'snooze_time' not in st.session_state:
-        st.session_state.snooze_time = 0
+  alarm_time = f"{hour:02d}:{minute:02d}:{second:02d}"
 
-    hour = st.selectbox("Hour", list(range(24)), format_func=lambda x: f"{x:02d}")
-    minute = st.selectbox("Minute", list(range(60)), format_func=lambda x: f"{x:02d}")
-    second = st.selectbox("Second", list(range(60)), format_func=lambda x: f"{x:02d}")
-
-    alarm_time = f"{hour:02d}:{minute:02d}:{second:02d}"
-
-    message_option = st.radio(
-        "Choose Alarm Message Option",
-        ("None", "Custom Message", "Predefined Message")
-    )
-    if message_option == "Custom Message":
-        alarm_message = st.text_input("Enter your custom message", "Time's up!")
-    elif message_option == "Predefined Message":
-        predefined_messages = ["Wake up!", "Meeting time!", "Take a break!"]
-        alarm_message = st.selectbox("Choose a predefined message", predefined_messages)
+  col4, col5 = st.columns(2)
+  with col4:
+    message_option = st.radio("Choose Alarm Message Option", ("Predefined Message", "Custom Message"), key="msg_opt")
+    if message_option == "Predefined Message":
+      predefined_messages = ["Time's up!", "Wake up!", "Meeting time!", "Take a break!"]
+      alarm_message = st.selectbox("Choose a predefined message", predefined_messages, key="predef_msg")
     else:
-        alarm_message = "Time's up!"
+      alarm_message = st.text_area("Enter your custom message", "Time's up!", key="custom_msg")
 
-    note_option = st.radio(
-        "Choose Note/Link Option",
-        ("None", "Custom Note/Link")
-    )
+  with col5:
+    note_option = st.radio("Choose Note/Link Option", ("None", "Custom Note/Link"), key="note_opt")
     if note_option == "Custom Note/Link":
-        alarm_note = st.text_area("Enter your link or note here", "")
+      alarm_note = st.text_area("Enter your link or note here", "", key="custom_note")
     else:
-        alarm_note = "No note or link"
+      alarm_note = "No note or link"
 
-    snooze_time = st.number_input("Snooze Time (minutes)", min_value=0, max_value=60, value=0)
-
-    if st.button("Set Alarm"):
-        st.session_state.alarm_time = alarm_time
-        st.session_state.alarm_message = alarm_message
-        st.session_state.alarm_note = alarm_note
-        st.session_state.snooze_time = snooze_time
-        st.session_state.snooze_triggered = False
-        st.success(f"Alarm set for {alarm_time} with message: '{alarm_message}' and note: '{alarm_note}'")
-        check_alarm()
-
-    if st.session_state.alarm_triggered:
-        st.balloons()
-        st.warning(st.session_state.alarm_message)
-        st.info(f"Note/Link: {st.session_state.alarm_note}")
-        st.session_state.alarm_triggered = False
+  if st.button("Set Alarm"):
+    now = datetime.datetime.now()
+    alarm_dt = now.replace(hour=int(hour), minute=int(minute), second=int(second), microsecond=0)
+    if alarm_dt <= now:
+      st.toast(f"(> {datetime.datetime.now().strftime("%H:%M:%S")}) Alarm time must be in the future.", icon="⚠️")
+    elif (alarm_dt - now).total_seconds() > 3600:
+      st.toast("Alarm time must be within the next hour.", icon="⚠️")
+    else:
+      st.success(f"Alarm set for {alarm_time}.", icon="⏰")
+      st.toast("Waiting for alarm...", icon="⏰")
+      while True:
+        current_time = datetime.datetime.now()
+        if current_time >= alarm_dt:
+          st.balloons()
+          st.warning(alarm_message, icon="⚠️")
+          st.info(f"Note/Link: {alarm_note}", icon="ℹ️")
+          st.toast("Alarm triggered!", icon="🔔")
+          break
+        time.sleep(1)
