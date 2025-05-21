@@ -2,12 +2,15 @@ import streamlit as st
 import time
 
 def timer():
-  st.subheader("Timer")
-  st.write("This is a simple timer application.")
+  st.info("This is a simple timer application.", icon="⏳")
 
-  hour = st.number_input("Hour", 0, 23, 0)
-  minute = st.number_input("Minute", 0, 59, 0)
-  second = st.number_input("Second", 0, 59, 0)
+  col1, col2, col3 = st.columns(3)
+  with col1:
+    hour = st.number_input("Hour", min_value=0, max_value=23, value=0)
+  with col2:
+    minute = st.number_input("Minute", min_value=0, max_value=59, value=0)
+  with col3:
+    second = st.number_input("Second", min_value=0, max_value=59, value=0)
 
   if st.button("Start Timer"):
     countdown_time = hour * 3600 + minute * 60 + second
@@ -22,4 +25,5 @@ def timer():
       countdown_time -= 1
       time.sleep(1)
 
+    st.balloons()
     timer_message.success("Time's up!", icon="🎉")
