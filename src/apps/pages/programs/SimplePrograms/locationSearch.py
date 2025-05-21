@@ -2,37 +2,38 @@ import streamlit as st
 import requests
 
 def fetch_location_from_ip(ip_address):
-    url = f"http://ip-api.com/json/{ip_address}"
-    response = requests.get(url)
-    data = response.json()
+  url = f"http://ip-api.com/json/{ip_address}"
+  response = requests.get(url)
+  data = response.json()
 
-    if data.get("status") == "success":
-        return {
-            "City": data.get("city", "N/A"),
-            "Region": data.get("regionName", "N/A"),
-            "Country": data.get("country", "N/A"),
-            "Latitude": data.get("lat", "N/A"),
-            "Longitude": data.get("lon", "N/A"),
-            "ISP": data.get("isp", "N/A"),
-        }
-    return None
+  if data.get("status") == "success":
+    return {
+      "City": data.get("city", "N/A"),
+      "Region": data.get("regionName", "N/A"),
+      "Country": data.get("country", "N/A"),
+      "Latitude": data.get("lat", "N/A"),
+      "Longitude": data.get("lon", "N/A"),
+      "ISP": data.get("isp", "N/A"),
+    }
+  return None
 
 def locationSearch():
-    st.title("🌍 IP Address to Location Lookup")
+  st.info("Enter an IP address to find its location.", icon="ℹ️")
+  ip_address = st.text_input("Enter an IP address", placeholder="e.g., 57.49.176.72")
 
-    ip_address = st.text_input("Enter an IP Address:")
+  if st.button("Find Location") and ip_address:
+    with st.spinner("Fetching Location..."):
+      location_info = fetch_location_from_ip(ip_address.strip())
 
-    if st.button("Find Location"):
-        with st.spinner("Fetching Location..."):
-            location_info = fetch_location_from_ip(ip_address.strip())
-
-        if location_info:
-            st.subheader("📌 Location Details")
-            st.write(f"**City:** {location_info['City']}")
-            st.write(f"**Region:** {location_info['Region']}")
-            st.write(f"**Country:** {location_info['Country']}")
-            st.write(f"**Latitude:** {location_info['Latitude']}")
-            st.write(f"**Longitude:** {location_info['Longitude']}")
-            st.write(f"**ISP:** {location_info['ISP']}")
-        else:
-            st.error("❌ Could not fetch location. Try another IP!")
+    if location_info:
+      col1, col2 = st.columns(2)
+      with col1:
+        st.metric(label="City", value=location_info["City"])
+        st.metric(label="Region", value=location_info["Region"])
+        st.metric(label="Country", value=location_info["Country"])
+      with col2:
+        st.metric(label="Latitude", value=location_info["Latitude"])
+        st.metric(label="Longitude", value=location_info["Longitude"])
+        st.metric(label="ISP", value=location_info["ISP"])
+    else:
+      st.error("❌ Could not fetch location. Try another IP!")
