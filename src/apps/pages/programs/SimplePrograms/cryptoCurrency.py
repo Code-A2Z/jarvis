@@ -203,7 +203,7 @@ def cryptoCurrency():
     "Crypto Global Market",
     "Companies Bitcoin Holdings"
   ]
-  option = st.selectbox("Select an option:", options=options)
+  option = st.selectbox("Select an option", options=options)
 
   if option == "Search Cryptocurrency":
     query = st.text_input(f"Enter the coin name or symbol", placeholder="e.g. Bitcoin, BTC")
