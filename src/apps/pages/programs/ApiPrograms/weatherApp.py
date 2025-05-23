@@ -2,6 +2,16 @@ import streamlit as st
 import requests
 import os
 
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
+
+api_guide = """### How to get your API Key:
+1. Visit [WeatherAPI.com](https://www.weatherapi.com/).
+2. Sign up for a free account.
+3. Generate an API key from your account dashboard.
+4. Enter the API key in the input field.
+"""
+
 def getWeather(api_key, city):
 	try:
 		url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
@@ -26,51 +36,32 @@ def getWeather(api_key, city):
 	except Exception as e:
 		return None, str(e)
 
-def API_Exists():
-	if "WEATHER_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["WEATHER_API_KEY"]:
-		return True
-	elif "WEATHER_API_KEY" in os.environ and os.environ["WEATHER_API_KEY"]:
-		return True
-	return False
-
-def showInstructions():
-	st.markdown("### Weather App")
-	st.markdown("""### How to get your API Key:
-	1. Visit [WeatherAPI.com](https://www.weatherapi.com/).
-	2. Sign up for a free account.
-	3. Generate an API key from your account dashboard.
-	4. Enter the API key in the input field.
-	""")
-	api_key = st.text_input("Enter your WeatherAPI.com API Key")
-	if st.button("Enter") and api_key != "":
-		os.environ["WEATHER_API_KEY"] = api_key
-		st.rerun()
-
 def weatherApp():
-	if API_Exists():
-		api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
-		st.markdown("### Weather App")
-		city = st.text_input("Enter City Name")
+	exists = isKeyExist("WEATHER_API_KEY", "api_key")
+	if not exists["WEATHER_API_KEY"]:
+		showInstructions(markdown_text=api_guide, fields="WEATHER_API_KEY")
+		st.stop()
 
-		if st.button("Get Weather"):
-			if api_key and city:
-				weather, error = getWeather(api_key, city)
-				if weather:
-					st.subheader(f"Weather in {weather['city']}, {weather['country']}")
-					col1, col2 = st.columns(2)
-					with col1:
-						st.image(f"http:{weather['icon']}")
-						st.write(f"**{weather['condition']}**")
-					with col2:
-						st.write(f"**Temperature:** {weather['temperature']} °C")
-						st.write(f"**Feels Like:** {weather['feels_like']} °C")
-						st.write(f"**Humidity:** {weather['humidity']} %")
-						st.write(f"**Pressure:** {weather['pressure']} hPa")
-						st.write(f"**Wind Speed:** {weather['wind_speed']} kph")
-					st.write(f"**Last Updated:** {weather['last_updated']}")
-				else:
-					st.error(f"Error: {error}")
+	api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
+	city = st.text_input("Enter City Name")
+
+	if st.button("Get Weather"):
+		if api_key and city:
+			weather, error = getWeather(api_key, city)
+			if weather:
+				st.subheader(f"Weather in {weather['city']}, {weather['country']}")
+				col1, col2 = st.columns(2)
+				with col1:
+					st.image(f"http:{weather['icon']}")
+					st.write(f"**{weather['condition']}**")
+				with col2:
+					st.write(f"**Temperature:** {weather['temperature']} °C")
+					st.write(f"**Feels Like:** {weather['feels_like']} °C")
+					st.write(f"**Humidity:** {weather['humidity']} %")
+					st.write(f"**Pressure:** {weather['pressure']} hPa")
+					st.write(f"**Wind Speed:** {weather['wind_speed']} kph")
+				st.write(f"**Last Updated:** {weather['last_updated']}")
 			else:
-				st.error("Please provide both API Key and City Name.")
-	else:
-		showInstructions()
+				st.error(f"Error: {error}")
+		else:
+			st.error("Please provide both API Key and City Name.")

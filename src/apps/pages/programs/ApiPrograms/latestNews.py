@@ -3,6 +3,17 @@ import streamlit as st
 import requests
 import os
 
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
+
+api_guide = """
+### How to get your API Key:
+1. Visit [newsapi.org](https://newsapi.org/).
+2. Sign up for a free account.
+3. Generate an API key from your account dashboard.
+4. Enter the API key in the input field.
+"""
+
 COUNTRIES = {
   "United Arab Emirates": "AE",
   "Argentina": "AR",
@@ -78,25 +89,6 @@ SORTBY = {
   "Popularity": "popularity"
 }
 
-def API_Exists():
-  if "NEWS_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["NEWS_API_KEY"]:
-    return True
-  elif "NEWS_API_KEY" in os.environ and os.environ["NEWS_API_KEY"]:
-    return True
-  return False
-
-def showInstructions():
-  st.markdown("""### How to get your API Key:
-  1. Visit [newsapi.org](https://newsapi.org/).
-  2. Sign up for a free account.
-  3. Generate an API key from your account dashboard.
-  4. Enter the API key in the input field.
-  """)
-  api_key = st.text_input("Enter your newsapi.org API Key")
-  if st.button("Enter") and api_key != "":
-    os.environ["NEWS_API_KEY"] = api_key
-    st.rerun()
-
 def formatISODate(iso_date_str):
   dateObj = datetime.strptime(iso_date_str, "%Y-%m-%dT%H:%M:%SZ")
   date = dateObj.strftime("%B %d, %Y, %I:%M %p")
@@ -146,8 +138,9 @@ def showNews(API, required, query, sortby):
     st.error(data.get("message", "Unknown error"), icon="🚨")
 
 def latestNews():
-  if not API_Exists():
-    showInstructions()
+  exists = isKeyExist("NEWS_API_KEY", "api_key")
+  if not exists["NEWS_API_KEY"]:
+    showInstructions(markdown_text=api_guide, fields="NEWS_API_KEY")
     st.stop()
 
   required = st.selectbox("Select an option", list(REQUIRED.keys()))

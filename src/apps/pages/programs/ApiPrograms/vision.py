@@ -3,34 +3,21 @@ import google.generativeai as genai
 import base64
 import os
 
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
+
+api_guide = """
+To get started, obtain an API key from [Google Gemini API](https://ai.google.dev/gemini-api)
+"""
 
 def validate_file_size(file):
     return file is not None and file.size <= 20 * 1024 * 1024
 
-def show_instructions():
-    st.markdown("### Welcome to Vision 🌟")
-    st.markdown(
-        "To get started, obtain an API key from [Google Gemini API](https://ai.google.dev/gemini-api) and enter it below:")
-    api_key = st.text_input("Enter your Google Gemini API Key", type="password")
-    if st.button("Submit") and api_key:
-        os.environ["GEMINI_API_KEY"] = api_key
-        st.success("API Key has been set. Please reload the page.")
-        st.rerun()
-
-def api_exists():
-    if "GEMINI_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["GEMINI_API_KEY"]:
-        return True
-    elif "GEMINI_API_KEY" in os.environ and os.environ["GEMINI_API_KEY"]:
-        return True
-    return False
-
-
 def vision():
-    st.title("Vision: AI-Powered Content Generator")
-
-    if not api_exists():
-        show_instructions()
-        return
+    exists = isKeyExist("GEMINI_API_KEY", "api_key")
+    if not exists["GEMINI_API_KEY"]:
+        showInstructions(markdown_text=api_guide, fields="GEMINI_API_KEY")
+        st.stop()
 
     api_key = (st.secrets['api_key']["GEMINI_API_KEY"] or os.environ["GEMINI_API_KEY"])
     genai.configure(api_key=api_key)

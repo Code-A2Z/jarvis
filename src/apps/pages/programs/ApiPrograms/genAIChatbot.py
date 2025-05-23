@@ -2,22 +2,15 @@ import google.generativeai as genai
 import streamlit as st
 import os
 
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
+
+api_guide = """
+Obtain an API key from [Google](https://ai.google.dev/gemini-api) and Enter it here.
+"""
+
 if "messages" not in st.session_state:
   st.session_state.messages = []
-
-def API_Exists():
-  if "GEMINI_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["GEMINI_API_KEY"]:
-    return True
-  elif "GEMINI_API_KEY" in os.environ and os.environ["GEMINI_API_KEY"]:
-    return True
-  return False
-
-def showInstructions():
-  st.markdown("Obtain an API key from [Google](%s) and enter it here:" % "https://ai.google.dev/gemini-api")
-  API = st.text_input("Enter your ai.google.dev/gemini-api API Key")
-  if st.button("Enter") and API != "":
-    os.environ["GEMINI_API_KEY"] = API
-    st.rerun()
 
 def geminiINIT():
   model = genai.GenerativeModel("gemini-1.5-flash")
@@ -40,8 +33,9 @@ def displayHistory():
       st.write(message["content"])
 
 def genAIChatbot():
-  if not API_Exists():
-    showInstructions()
+  exists = isKeyExist("GEMINI_API_KEY", "api_key")
+  if not exists["GEMINI_API_KEY"]:
+    showInstructions(markdown_text=api_guide, fields="GEMINI_API_KEY")
     prompt = None
     st.stop()
 

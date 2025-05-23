@@ -4,24 +4,15 @@ import requests
 import datetime
 import os
 
-def API_Exists():
-	if "NASA_API_KEY" in st.secrets['api_key'] and st.secrets['api_key']["NASA_API_KEY"]:
-		return True
-	elif "NASA_API_KEY" in os.environ and os.environ["NASA_API_KEY"]:
-		return True
-	return False
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
 
-def showInstructions():
-	st.markdown("""### How to get your API Key:
-	1. Visit [api.nasa.gov](https://api.nasa.gov/).
-	2. Sign up for a free account.
-	3. Generate an API key from your account dashboard.
-	4. Enter the API key in the input field.
-	""")
-	api_key = st.text_input("Enter your api.nasa.gov API Key")
-	if st.button("Enter") and api_key != "":
-		os.environ["NASA_API_KEY"] = api_key
-		st.rerun()
+api_guide = """### How to get your API Key:
+1. Visit [api.nasa.gov](https://api.nasa.gov/).
+2. Sign up for a free account.
+3. Generate an API key from your account dashboard.
+4. Enter the API key in the input field.
+"""
 
 def NasaNews(NASA_API_KEY):
 	date = st.date_input("What day would you like to know ?")
@@ -219,10 +210,10 @@ def SolarBodies():
 		st.error(f"Error: {str(e)}. No data found for the selected body.")
 
 def nasa():
-	st.title("Welcome To Nasa Program!")
-	if not API_Exists():
-		showInstructions()
-		return
+	exists = isKeyExist("NASA_API_KEY", folder="api_key")
+	if not exists["NASA_API_KEY"]:
+		showInstructions(markdown_text=api_guide, fields="NASA_API_KEY")
+		st.stop()
 
 	choice = st.selectbox("What Would You Like To Know?", [None, "Nasa News", "Mars Image", "Asteroids", "Solar Bodies"])
 	NASA_API_KEY = (os.environ.get("NASA_API_KEY", "") or st.secrets['api_key']["NASA_API_KEY"])

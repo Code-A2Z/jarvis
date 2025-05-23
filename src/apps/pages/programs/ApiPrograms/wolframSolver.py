@@ -1,6 +1,17 @@
 import streamlit as st
 import requests
 
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
+
+api_guide = """
+### How to get your Wolfram Alpha API Key:
+1. Visit [Wolfram Alpha](https://developer.wolframalpha.com/).
+2. Sign up for a free account.
+3. Generate an API key from your account dashboard.
+4. Enter the API key in the input field.
+"""
+
 WOLFRAM_URL = "http://api.wolframalpha.com/v2/query"
 WOLFRAM_API_KEY = st.secrets["api_key"]["WOLFRAM_API_KEY"]
 
@@ -36,6 +47,10 @@ def display_results(pods):
     st.error("No results found for the given input!", icon='🚨')
 
 def wolframSolver():
+  exists = isKeyExist("WOLFRAM_API_KEY", "api_key")
+  if not exists["WOLFRAM_API_KEY"]:
+    showInstructions(markdown_text=api_guide, fields="WOLFRAM_API_KEY")
+    st.stop()
   query = st.text_area("Enter a mathematical or scientific query (e.g., '5 + 5', 'integrate x^2 dx', 'solve x^2 + 5x = 0')")
   if st.button("Calculate"):
     if query:
