@@ -2,6 +2,7 @@ import streamlit as st
 
 # /auth
 auth_page = st.Page("src/auth/auth.py", title="Authentication", icon=":material/lock_open:")
+env_page = st.Page("src/auth/env.py", title="Environment Variables", icon=":material/settings_input_component:")
 
 # /apps/public
 home = st.Page("src/apps/public/home.py", title="Home", icon=":material/home:")
@@ -59,6 +60,9 @@ def application():
         socialMediaApps,
         websites,
         coding,
+      ],
+      "Jarvis Credentials": [
+        env_page,
       ],
     })
 
