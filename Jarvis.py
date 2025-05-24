@@ -18,11 +18,12 @@ utility = st.Page(f"{MAIN_DIR}/programs/simpleProgram.py", title="Utility", icon
 games = st.Page(f"{MAIN_DIR}/programs/games.py",title="Games",icon=":material/casino:")
 
 # /models
-chatBot = st.Page(f"{MAIN_DIR}/models/chatBotModel.py", title="Chat Bot", icon=":material/smart_toy:")
-healthCare = st.Page(f"{MAIN_DIR}/models/healthCareModel.py", title="Health Care", icon=":material/health_and_safety:")
-imageProcessing = st.Page(f"{MAIN_DIR}/models/imageProcessingModel.py", title="Image Processing", icon=":material/image_search:")
-objectDetection = st.Page(f"{MAIN_DIR}/models/objectDetectionModel.py", title="Object Detection", icon=":material/camera_alt:")
-recommendation = st.Page(f"{MAIN_DIR}/models/recommendationModel.py", title="Recommendation", icon=":material/recommend:")
+chatBotModels = st.Page(f"{MAIN_DIR}/models/chatBotModel.py", title="Chat Bot", icon=":material/smart_toy:")
+healthCareModels = st.Page(f"{MAIN_DIR}/models/healthCareModel.py", title="Health Care", icon=":material/health_and_safety:")
+imageProcessingModels = st.Page(f"{MAIN_DIR}/models/imageProcessingModel.py", title="Image Processing", icon=":material/image_search:")
+objectDetectionModels = st.Page(f"{MAIN_DIR}/models/objectDetectionModel.py", title="Object Detection", icon=":material/camera_alt:")
+recommendationModels = st.Page(f"{MAIN_DIR}/models/recommendationModel.py", title="Recommendation", icon=":material/recommend:")
+utilityModels = st.Page(f"{MAIN_DIR}/models/utilityModel.py", title="Utility", icon=":material/extension:")
 
 # /automations
 messenger = st.Page(f"{MAIN_DIR}/automations/messenger.py", title="Messenger", icon=":material/email:")
@@ -51,11 +52,12 @@ def application():
         games,
       ],
       "Models": [
-        chatBot,
-        healthCare,
-        imageProcessing,
-        objectDetection,
-        recommendation,
+        chatBotModels,
+        healthCareModels,
+        imageProcessingModels,
+        objectDetectionModels,
+        recommendationModels,
+        utilityModels,
       ],
       "Automations": [
         messenger,
