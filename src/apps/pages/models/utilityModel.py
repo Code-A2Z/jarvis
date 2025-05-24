@@ -3,13 +3,13 @@ import importlib
 import streamlit as st
 from src.helpers.getModules import getModules
 
-MAIN_DIR = 'ChatBotModels'
+MAIN_DIR = 'UtilityModels'
 BASE_DIR = os.path.dirname(__file__)
 COMMON_MODULE_PATH = os.path.join(BASE_DIR, MAIN_DIR)
 MODULES = getModules(COMMON_MODULE_PATH)
 
-def chatBotModels():
-  st.title('Chat Bot Models')
+def UtilityModels():
+  st.title('Utility Models')
   choice = st.selectbox('Select a model to execute', [None] + list(MODULES.keys()))
   st.divider()
 
@@ -30,4 +30,4 @@ def chatBotModels():
   else:
     st.info("Star this project on [GitHub](https://github.com/Code-A2Z/jarvis), if you like it!", icon='⭐')
 
-chatBotModels()
+UtilityModels()

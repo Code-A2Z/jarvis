@@ -1,7 +1,6 @@
 import tensorflow as tf
 import streamlit as st
 import numpy as np
-from src.utils.english import Speak
 from PIL import Image
 import gdown
 
@@ -12,7 +11,7 @@ def load_model():
     return model
 
 def get_mri():
-    img = st.file_uploader("Upload here", type=["jpg", "jpeg"])
+    img = st.file_uploader("Please Upload MRI Scan of Brain", type=["jpg", "jpeg"])
     codn = False
     data = []
     if img is not None:
@@ -31,7 +30,6 @@ def do_test(img):
     return res
 
 def brainTumorModel():
-    st.write("Please Upload MRI Scan of Brain")
     codn, img = get_mri()
     res = None
 
@@ -41,15 +39,11 @@ def brainTumorModel():
     if res is not None:
         if res == 0:
             st.error("Hi User, You are diagnosed with Glioma. Please consult a doctor.")
-            Speak("Hi User, You are diagnosed with Glioma. Please consult a doctor.")
         elif res == 1:
             st.error("Hi User, You are diagnosed with Meningioma. Please consult a doctor.")
-            Speak("Hi User, You are diagnosed with Meningioma. Please consult a doctor.")
         elif res == 2:
             st.success("Congrats User, You are not diagnosed with a brain tumor.")
-            Speak("Congrats User, You are not diagnosed with a brain tumor.")
         elif res == 3:
             st.error("Hi User, You are diagnosed with Pituitary tumor. Please consult a doctor.")
-            Speak("Hi User, You are diagnosed with Pituitary tumor. Please consult a doctor.")
 
     codn = False

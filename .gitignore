@@ -18,3 +18,4 @@ myenv
 *.prototxt
 *.caffemodel
 *.pt
+*.log
