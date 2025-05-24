@@ -1,7 +1,6 @@
 import tensorflow as tf
 import streamlit as st
 import numpy as np
-from src.utils.english import Speak
 import gdown
 
 @st.cache_resource
@@ -41,7 +40,5 @@ def diabetesDetectionModel():
 	if db_btn:
 		if diabetes_res == 0:
 			st.success(f'Congrats {st.session_state.name},\n You are not diagnosed with diabetes')
-			Speak(f'Congrats {st.session_state.name}, You are not diagnosed with diabetes')
 		if diabetes_res==1:
 			st.error(f'Hi {st.session_state.name},\nYou are diagnosed with diabetes.\nPlease consult a doctor.')
-			Speak(f'Hi {st.session_state.name}, You are diagnosed with diabetes. Please consult a doctor.')

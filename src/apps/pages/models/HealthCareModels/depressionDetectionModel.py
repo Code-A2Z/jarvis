@@ -3,7 +3,6 @@ import streamlit as st
 import numpy as np
 import librosa
 import matplotlib.pyplot as plt
-from src.utils.english import Speak
 import gdown
 
 @st.cache_resource
@@ -42,7 +41,5 @@ def depressionDetectionModel():
 		prediction = model.predict(img_array)
 		if prediction*100 > 50:
 			st.error(f'Hi {st.session_state.name}, you seem to have Depression. Please consult a doctor and take care.')
-			Speak(f'Hi {st.session_state.name},You seem to have Depression. Please consult a doctor and take care.')
 		else:
 			st.success(f'Hi {st.session_state.name}, you seem to perfectly fine. Take care and enjoy !!!')
-			Speak(f'Hi {st.session_state.name},You seem to perfectly fine. Take care and enjoy')
