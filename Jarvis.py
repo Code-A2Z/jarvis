@@ -11,10 +11,10 @@ youtubePlaylist = st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Vi
 MAIN_DIR = "src/apps/pages"
 
 # /programs
-simplePrograms = st.Page(f"{MAIN_DIR}/programs/simpleProgram.py", title="Simple Programs", icon=":material/emoji_objects:")
-apiPrograms = st.Page(f"{MAIN_DIR}/programs/apiProgram.py", title="API Programs", icon=":material/api:")
-imagePrograms = st.Page(f"{MAIN_DIR}/programs/imageProgram.py", title="Image Programs", icon=":material/image:")
-studyPrograms = st.Page(f"{MAIN_DIR}/programs/studyProgram.py", title="Study Programs", icon=":material/school:")
+api = st.Page(f"{MAIN_DIR}/programs/apiProgram.py", title="API", icon=":material/api:")
+image = st.Page(f"{MAIN_DIR}/programs/imageProgram.py", title="Image", icon=":material/image:")
+study = st.Page(f"{MAIN_DIR}/programs/studyProgram.py", title="Study", icon=":material/school:")
+utility = st.Page(f"{MAIN_DIR}/programs/simpleProgram.py", title="Utility", icon=":material/extension:")
 games = st.Page(f"{MAIN_DIR}/programs/games.py",title="Games",icon=":material/casino:")
 
 # /models
@@ -43,10 +43,10 @@ def application():
   if st.user and st.user.is_logged_in:
     pages.update({
       "Programs": [
-        simplePrograms,
-        apiPrograms,
-        imagePrograms,
-        studyPrograms,
+        api,
+        image,
+        study,
+        utility,
         games,
       ],
       "Models": [
