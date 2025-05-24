@@ -18,10 +18,11 @@ utility = st.Page(f"{MAIN_DIR}/programs/simpleProgram.py", title="Utility", icon
 games = st.Page(f"{MAIN_DIR}/programs/games.py",title="Games",icon=":material/casino:")
 
 # /models
-chatBotModels = st.Page(f"{MAIN_DIR}/models/chatBotModel.py", title="Chat Bot Models", icon=":material/smart_toy:")
-healthCareModels = st.Page(f"{MAIN_DIR}/models/healthCareModel.py", title="Health Care Models", icon=":material/health_and_safety:")
-recommendationModels = st.Page(f"{MAIN_DIR}/models/recommendationModel.py", title="Recommendation Models", icon=":material/recommend:")
-objectDetectionModels = st.Page(f"{MAIN_DIR}/models/objectDetectionModel.py", title="Object Detection Models", icon=":material/camera_alt:")
+chatBot = st.Page(f"{MAIN_DIR}/models/chatBotModel.py", title="Chat Bot", icon=":material/smart_toy:")
+healthCare = st.Page(f"{MAIN_DIR}/models/healthCareModel.py", title="Health Care", icon=":material/health_and_safety:")
+imageProcessing = st.Page(f"{MAIN_DIR}/models/imageProcessingModel.py", title="Image Processing", icon=":material/image_search:")
+objectDetection = st.Page(f"{MAIN_DIR}/models/objectDetectionModel.py", title="Object Detection", icon=":material/camera_alt:")
+recommendation = st.Page(f"{MAIN_DIR}/models/recommendationModel.py", title="Recommendation", icon=":material/recommend:")
 
 # /automations
 messenger = st.Page(f"{MAIN_DIR}/automations/messenger.py", title="Messenger", icon=":material/email:")
@@ -50,10 +51,11 @@ def application():
         games,
       ],
       "Models": [
-        chatBotModels,
-        healthCareModels,
-        recommendationModels,
-        objectDetectionModels,
+        chatBot,
+        healthCare,
+        imageProcessing,
+        objectDetection,
+        recommendation,
       ],
       "Automations": [
         messenger,
