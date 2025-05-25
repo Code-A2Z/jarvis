@@ -1,6 +1,7 @@
 import streamlit as st
 import importlib
 import random
+import re
 
 from src.helpers.getModules import getModules
 from src.helpers.getFolders import getFolders
@@ -25,9 +26,12 @@ icons = [
   ":material/share:",
 ]
 
+def formatTitle(name):
+  return re.sub(r'(?<!^)(?=[A-Z])', ' ', name)
+
 def createPageModule(BASE_DIR, MAIN_DIR, MODULES):
-  st.title(MAIN_DIR)
-  choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()), key=MAIN_DIR)
+  st.title(formatTitle(MAIN_DIR))
+  choice = st.selectbox(f'Select a {BASE_DIR[:-1].lower()} to execute', [None] + list(MODULES.keys()), key=MAIN_DIR)
   st.divider()
 
   if choice in MODULES:
