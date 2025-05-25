@@ -1,6 +1,7 @@
 Authlib==1.5.2
 deep-translator==1.11.4
 google-generativeai==0.8.5
+kaggle==1.7.4.5
 matplotlib==3.10.3
 Pint==0.24.4
 plotly==6.1.1
