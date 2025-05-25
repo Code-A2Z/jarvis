@@ -25,7 +25,7 @@ icons = [
   ":material/share:",
 ]
 
-def createPageModule(MAIN_DIR, MODULES):
+def createPageModule(BASE_DIR, MAIN_DIR, MODULES):
   st.title(MAIN_DIR)
   choice = st.selectbox('Select a program to execute', [None] + list(MODULES.keys()), key=MAIN_DIR)
   st.divider()
@@ -33,7 +33,7 @@ def createPageModule(MAIN_DIR, MODULES):
   if choice in MODULES:
     module_name = MODULES[choice]
     try:
-      module = importlib.import_module(f"src.apps.pages.programs.{MAIN_DIR}.{module_name}")
+      module = importlib.import_module(f"src.apps.pages.{BASE_DIR}.{MAIN_DIR}.{module_name}")
       func = getattr(module, module_name)
       func()
     except ModuleNotFoundError as e:
@@ -56,7 +56,7 @@ def structPages(path):
     if MODULES:
       pages.append(
         st.Page(
-          lambda folder=folder, MODULES=MODULES: createPageModule(folder, MODULES),
+          lambda path=path.split('/')[-1], folder=folder, MODULES=MODULES: createPageModule(path, folder, MODULES),
           title=name,
           icon=random.choice(icons),
           url_path=folder
