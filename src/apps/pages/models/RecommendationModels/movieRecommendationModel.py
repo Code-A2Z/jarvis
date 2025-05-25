@@ -5,9 +5,9 @@ import pickle
 from src.helpers.kaggle import downloadNotebookOutput
 
 def load_data():
-  downloadNotebookOutput('avdhesh15', 'movie-recommendation-app', 'movieRecommendationModel')
-  movies_data = pickle.load(open('movieRecommendationModel/movies_list.pkl', 'rb'))
-  similarity = pickle.load(open('movieRecommendationModel/similarity.pkl', 'rb'))
+  downloadNotebookOutput('avdhesh15', 'movie-recommendation-app', 'notebook')
+  movies_data = pickle.load(open('notebook/movieRecommendationModel/movies_list.pkl', 'rb'))
+  similarity = pickle.load(open('notebook/movieRecommendationModel/similarity.pkl', 'rb'))
   movies_list = movies_data['title'].values
   return movies_data, similarity, movies_list
 
