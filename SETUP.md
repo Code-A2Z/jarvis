@@ -1,10 +1,10 @@
-# 🛠️ SETUP.md – How to Set Up Jarvis Locally
+# How to run Jarvis locally
 
 Welcome to the Jarvis Virtual Assistant! This guide will walk you through setting up the project on your local machine so you can explore features, understand the internal flow, and start contributing.
 
 ---
 
-## 📋 Prerequisites
+### 📋 Prerequisites
 
 Ensure you have the following installed:
 
@@ -18,7 +18,7 @@ Ensure you have the following installed:
 
 ---
 
-## 🔻 Clone the Repository
+### 📦 Clone the Repository
 
 ```bash
 git clone https://github.com/Code-A2Z/jarvis.git
@@ -27,16 +27,16 @@ cd jarvis
 
 ---
 
-## 🧪 Set Up a Virtual Environment (Optional but Recommended)
+### 🧰 Set Up a Virtual Environment (Recommended)
 
-### ▶️ Windows
+#### ▶️ Windows
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-### 🐧 macOS/Linux
+#### 🐧 macOS/Linux
 
 ```bash
 python3 -m venv venv
@@ -45,9 +45,7 @@ source venv/bin/activate
 
 ---
 
-## 📦 Install Dependencies
-
-Install all required Python packages using:
+### 🧪 Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -55,75 +53,79 @@ pip install -r requirements.txt
 
 ---
 
-## 🔐 Configure `.streamlit/secrets.toml`
+### 🔐 Configure `.streamlit/secrets.toml`
 
-Create a `.streamlit` folder in the root if it doesn’t exist:
+If the `.streamlit` folder doesn't exist, create it:
 
 ```bash
 mkdir .streamlit
 ```
 
-Then create a file named `secrets.toml` inside `.streamlit`:
+Then create a file named `secrets.toml` inside `.streamlit` and **add the following fields only** (as per maintainer's request):
 
 ```toml
 [general]
-ADMIN_EMAIL = "youremail@example.com"
-ADMIN_NAME = "Your Name"
+ADMIN_EMAIL = ""
+ADMIN_NAME = ""
 
 [auth]
-GOOGLE_CLIENT_ID = "your-google-client-id"
-GOOGLE_CLIENT_SECRET = "your-google-client-secret"
+redirect_uri = ""
+cookie_secret = ""
+
+[auth.google]
+client_id = ""
+client_secret = ""
+server_metadata_url = ""
 ```
 
-> You can find your client ID and secret by creating OAuth credentials in your Google Developer Console.
+> 🔒 Keep this file private. Never commit secrets to the repository.
 
 ---
 
-## 🧪 Running in Mock Mode (Optional)
+### 🧪 Mock Authentication (Optional)
 
-To test features without login, Jarvis supports a mock mode. This allows you to bypass Google Auth while developing.
+To test features without logging in via Google, you can mock a user manually.
+
+In `home.py`, add:
+
+```python
+st.session_state.user = {
+    "name": "Test User",
+    "email": "test@example.com"
+}
+```
+
+This will let you access all core features locally during development.
+
+---
+
+### 🚀 Run Jarvis
+
+Launch the application:
 
 ```bash
-streamlit run jarvis.py --mock
+streamlit run src/apps/public/home.py
 ```
 
-This uses a file named `mock_user.py` to simulate a logged-in user.
+It should open in your browser at `http://localhost:8501`.
 
 ---
 
-## 🚀 Run Jarvis
+### 🛠️ Common Errors & Fixes
 
-Once setup is done, run the project:
-
-```bash
-streamlit run jarvis.py
-```
-
-Or to test without authentication:
-
-```bash
-streamlit run jarvis.py --mock
-```
-
-This should open the app in your browser at `http://localhost:8501`.
+- `ModuleNotFoundError`: Make sure the virtual environment is activated and dependencies installed.
+- `secrets.toml not found`: Ensure `.streamlit/secrets.toml` exists and is correctly formatted.
+- `Google login not working`: Re-check your `client_id`, `client_secret`, and `redirect_uri`.
 
 ---
 
-## 🐞 Troubleshooting
+### 🤝 Want to Contribute?
 
-- `ModuleNotFoundError`: Make sure the virtual environment is activated and you're inside the cloned `jarvis` directory.
-- `secrets.toml not found`: Ensure `.streamlit/secrets.toml` exists with correct credentials.
-- `Google Auth Not Working`: Try using `--mock` flag or check your client credentials.
-
----
-
-## 🤝 Want to Contribute?
-
-- Make sure you've read the [Contribution Guidelines](CONTRIBUTING.md)
-- Choose an issue from [GitHub Issues](https://github.com/Code-A2Z/jarvis/issues)
-- Join our community on [Discord](https://discord.gg/tSqtvHUJzE)
-- Raise a PR and tag the maintainers when ready!
+- Review the [Contribution Guidelines](CONTRIBUTING.md)
+- Join our [Discord Community](https://discord.gg/tSqtvHUJzE)
+- Raise an issue or PR with a clear description
+- Follow the project’s [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ---
 
-Happy contributing! 💻✨
+Happy coding! 💻✨ Let Jarvis assist you.
