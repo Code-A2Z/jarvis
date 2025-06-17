@@ -20,7 +20,7 @@ def load_summarizer():
         st.error("Please add GROQ_API_KEY to your .streamlit/secrets.toml file")
         st.stop()
 
-def textSummarizationModel():
+def textSummarization():
     user_input = st.text_area("Enter the text you'd like to summarize (minimum 50 words)", height=200, placeholder="Type or paste your text here...")
     if st.button("Summarize"):
         summarizer = load_summarizer()
