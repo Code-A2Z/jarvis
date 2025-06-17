@@ -1,6 +1,15 @@
 import streamlit as st
 from groq import Groq
 
+api_guide = """
+    ### How to get your Groq API Key:
+    1. Visit [Groq Console](https://console.groq.com/keys).
+    2. Sign up or log in with your account.
+    3. Navigate to the **API Keys** section.
+    4. Click on **+ Create Key** to generate a new API key.
+    5. Copy the key and paste it in the input field below.
+"""
+
 @st.cache_resource(show_spinner=True)
 def load_summarizer():
     """Initialize Groq client - replaces the transformers pipeline"""
