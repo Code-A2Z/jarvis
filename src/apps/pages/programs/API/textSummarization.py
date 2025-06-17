@@ -1,5 +1,9 @@
 import streamlit as st
 from groq import Groq
+import os
+
+from src.helpers.displayInstructions import showInstructions
+from src.helpers.checkKeyExist import isKeyExist
 
 api_guide = """
     ### How to get your Groq API Key:
@@ -13,12 +17,13 @@ api_guide = """
 @st.cache_resource(show_spinner=True)
 def load_summarizer():
     """Initialize Groq client - replaces the transformers pipeline"""
-    try:
-        api_key = st.secrets["api_key"]["GROQ_API_KEY"]
-        return Groq(api_key=api_key)
-    except KeyError:
-        st.error("Please add GROQ_API_KEY to your .streamlit/secrets.toml file")
+    exists = isKeyExist("GROQ_API_KEY", "api_key")
+    if not exists["GROQ_API_KEY"]:
+        showInstructions(markdown_text=api_guide, fields="GROQ_API_KEY")
         st.stop()
+
+    api_key = (os.environ.get("GROQ_API_KEY") or st.secrets['api_key']["GROQ_API_KEY"])
+    return Groq(api_key=api_key)
 
 def textSummarization():
     user_input = st.text_area("Enter the text you'd like to summarize (minimum 50 words)", height=200, placeholder="Type or paste your text here...")
