@@ -1,61 +1,18 @@
-# import streamlit as st
-# from transformers import pipeline
-
-# @st.cache_resource(show_spinner=True)
-# def load_summarizer():
-#   return pipeline("summarization", model="t5-small")
-
-# def textSummarizationModel():
-#   user_input = st.text_area("Enter the text you'd like to summarize (minimum 50 words)", height=200, placeholder="Type or paste your text here...")
-#   if st.button("Summarize"):
-#     summarizer = load_summarizer()
-#     if len(user_input.split()) < 50:
-#       st.toast("Please enter at least 50 words for summarization.", icon="⚠️")
-#     else:
-#       with st.spinner("Summarizing..."):
-#         summary = summarizer(user_input, max_length=150, min_length=30, do_sample=False)
-#         st.subheader("Summary:")
-#         st.write(summary[0]['summary_text'])
-
-
 import streamlit as st
-from groq import Groq
+from transformers import pipeline
 
 @st.cache_resource(show_spinner=True)
 def load_summarizer():
-    """Initialize Groq client - replaces the transformers pipeline"""
-    try:
-        api_key = st.secrets["api_key"]["GROQ_API_KEY"]
-        return Groq(api_key=api_key)
-    except KeyError:
-        st.error("Please add GROQ_API_KEY to your .streamlit/secrets.toml file")
-        st.stop()
+  return pipeline("summarization", model="t5-small")
 
 def textSummarizationModel():
-    user_input = st.text_area("Enter the text you'd like to summarize (minimum 50 words)", height=200, placeholder="Type or paste your text here...")
-    if st.button("Summarize"):
-        summarizer = load_summarizer()
-        if len(user_input.split()) < 50:
-            st.toast("Please enter at least 50 words for summarization.", icon="⚠️")
-        else:
-            with st.spinner("Summarizing..."):
-                # Use Groq API instead of transformers pipeline
-                chat_completion = summarizer.chat.completions.create(
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": f"You are a helpful assistant that summarizes text. Return only the content"
-                        },
-                        {
-                            "role": "user",
-                            "content": f"Please provide a concise and short summary of the following text\n\n{user_input}"
-                        }
-                    ],
-                    model="llama-3.1-8b-instant",  # Fast and efficient model
-                    max_tokens=150,
-                    temperature=0.3
-                )
-                
-                summary_text = chat_completion.choices[0].message.content
-                st.subheader("Summary:")
-                st.write(summary_text)
+  user_input = st.text_area("Enter the text you'd like to summarize (minimum 50 words)", height=200, placeholder="Type or paste your text here...")
+  if st.button("Summarize"):
+    summarizer = load_summarizer()
+    if len(user_input.split()) < 50:
+      st.toast("Please enter at least 50 words for summarization.", icon="⚠️")
+    else:
+      with st.spinner("Summarizing..."):
+        summary = summarizer(user_input, max_length=150, min_length=30, do_sample=False)
+        st.subheader("Summary:")
+        st.write(summary[0]['summary_text'])
