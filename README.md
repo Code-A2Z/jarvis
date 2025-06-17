@@ -10,18 +10,18 @@
     <a href="https://discord.gg/tSqtvHUJzE">
       <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" />
     </a><br /><br />
-    <img src="https://img.shields.io/github/repo-size/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/contributors/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/languages/count/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/stars/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/forks/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/last-commit/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/license/Avdhesh-Varshney/Jarvis" />
+    <img src="https://img.shields.io/github/repo-size/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/contributors/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/languages/count/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/stars/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/forks/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/last-commit/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/license/Code-A2Z/jarvis" />
     <br />
-    <img src="https://img.shields.io/github/issues-raw/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/issues-closed-raw/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/issues-pr-raw/Avdhesh-Varshney/Jarvis" />
-    <img src="https://img.shields.io/github/issues-pr-closed-raw/Avdhesh-Varshney/Jarvis" />
+    <img src="https://img.shields.io/github/issues-raw/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/issues-closed-raw/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/issues-pr-raw/Code-A2Z/jarvis" />
+    <img src="https://img.shields.io/github/issues-pr-closed-raw/Code-A2Z/jarvis" />
   </p>
 
   <p>
@@ -32,16 +32,13 @@
   ![User Services](https://img.shields.io/badge/User-Services-6a1b9a?style=flat-square)
   ![Admin Tools](https://img.shields.io/badge/Admin-Tools-28a745?style=flat-square)
   ![Authentication](https://img.shields.io/badge/Authentication-34495e?style=flat-square)
-  ![MongoDB](https://img.shields.io/badge/MongoDB-Database-e67e22?style=flat-square)
   </p>
 
   <p>
 
   ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-  ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
   ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
   ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)
-  ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
   </p>
 
   <p>
@@ -64,30 +61,12 @@
 
 **Jarvis** is a powerful virtual AI assistant designed to simplify your daily tasks through voice command integration. With features like automation, device management, and personalized interactions, Jarvis transforms the way you engage with technology. Built using Python and enhanced with AI models, it serves as an efficient tool for both personal and administrative needs, making everyday processes seamless and more productive.
 
-<details>
-<summary><h4>:zap: Core Features 🔑</h4></summary>
+#### :zap: Core Features 🔑
 
 - Control devices and execute tasks using natural language commands.
 - Streamline repetitive tasks to save time and effort.
 - Supports multiple user roles (User, Admin) for tailored access.
-- Utilizes MongoDB for secure and efficient data management.
-
-</details>
-
-<details>
-<summary><h4>:zap: Authentication 🔒</h4></summary>
-
-- **User Roles:** The application supports multiple roles (User, Admin), each with specific access to services.
-- **Login Credentials:** Ensure you have your ID and password ready for authentication.
-- **For Testing/Developing Purpose:**
-  - **User:**
-    - **ID:** user@user.com
-    - **Password:** user_Password
-  - **Admin:**
-    - **ID:** admin@admin.com
-    - **Password:** admin_Password
-
-</details>
+- Utilizes Streamlit built-in auth system for google authentication.
 
 <details>
 <summary><h4>:zap: Important Points to remember while submitting your work 📍</h4></summary>
@@ -127,7 +106,8 @@
       <div>
         <img src="https://github.com/user-attachments/assets/95ba44b4-016c-47ce-9285-2571562fabff" height=100px />
         <p><sub><b>SSOC</b></sub></p>
-        <a href="https://hack2skill.com/hack/ssoc"><b>2024</b></a>
+        <a href="https://hack2skill.com/hack/ssoc"><b>2024</b></a> |
+        <a href="https://reskilll.com/hack/ssoc4"><b>2025</b></a>
       </div>
     </td>
     <td align="center">
@@ -200,11 +180,11 @@
 
 ### ✨ Our Valuable Contributors 
 
-<a href="https://github.com/Avdhesh-Varshney/Jarvis/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Avdhesh-Varshney/Jarvis&max=1000" />
+<a href="https://github.com/Code-A2Z/jarvis/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Code-A2Z/jarvis&max=1000" />
 </a>
 
-![Line](https://github.com/Avdhesh-Varshney/WebMasterLog/assets/114330097/4b78510f-a941-45f8-a9d5-80ed0705e847)
+![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 # Tip from us 😇 
 ##### It always takes time to understand and learn. So, don't worry at all. We know <b>you have got this</b>! 💪 

@@ -19,7 +19,7 @@ def textSummarizationModel():
             st.toast("Please enter at least 50 words for summarization.", icon="⚠️")
         else:
             with st.spinner("Summarizing..."):
-                # Use Groq API instead of transformers pipeline
+                # Use Groq API instead of transformers pipeline.
                 chat_completion = summarizer.chat.completions.create(
                     messages=[
                         {

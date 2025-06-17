@@ -1,19 +1,13 @@
-Closes: <!-- #issue-number  -->
-
-- **Issue Title:** 
-- **Your Name:** 
-- **Your Role:** <!-- Mention your role (like GSSOC, SSOC, JWOC, etc. Contributor) -->
+<!-- #issue-number  -->
+Closes: 
 
 ### Describe the add-ons or changes you've made 📃
 
 
 
-### Screenshots 📷
-<!-- Must add the screenshot of the project or your changes for review your pr -->
-
-
 ### Working Video 📷
-<!-- Must add the working video of the project or your changes for review your pr -->
+<!-- Must add the working video of your changes with integration with jarvis to review your pr -->
+
 
 
 ### Type of change ☑️
