@@ -25,9 +25,13 @@ def quizGame():
         categories = categories_data["trivia_categories"]
         category_dict = {cat["name"]: cat["id"] for cat in categories}
 
-        selected_category = st.sidebar.selectbox("Select a category", list(category_dict.keys()))
+        selected_category = st.sidebar.selectbox(
+            "Select a category", list(category_dict.keys())
+        )
         selected_category_id = category_dict[selected_category]
-        difficulty = st.sidebar.selectbox("Select difficulty", ["easy", "medium", "hard"])
+        difficulty = st.sidebar.selectbox(
+            "Select difficulty", ["easy", "medium", "hard"]
+        )
     else:
         st.error("Failed to fetch categories. Try again later.")
         st.stop()
@@ -82,11 +86,12 @@ def quizGame():
                 score += 1
                 st.write(f"✅ **Question {i + 1}:** Correct!")
             else:
-                st.write(f"❌ **Question {i + 1}:** Incorrect! The correct answer was **{correct_answer}**.")
+                st.write(
+                    f"❌ **Question {i + 1}:** Incorrect! The correct answer was **{correct_answer}**."
+                )
 
         st.write(f"Your score: **{score}/{len(st.session_state.quiz_data)}**")
         if score == len(st.session_state.quiz_data):
             st.balloons()
         else:
             st.warning("Better luck next time!")
-
