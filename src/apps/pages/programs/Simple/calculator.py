@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def update_display(value):
   st.session_state.memory["display"] = value
 

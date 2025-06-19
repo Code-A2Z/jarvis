@@ -1,5 +1,7 @@
 from datetime import datetime
+
 import pytz
+
 
 def GreetUser(name):
   india_tz = pytz.timezone('Asia/Kolkata')

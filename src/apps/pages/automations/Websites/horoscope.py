@@ -1,6 +1,7 @@
-import streamlit as st
 import requests
+import streamlit as st
 from bs4 import BeautifulSoup
+
 
 def horoscope():
     def get_horoscope_by_day(zodiac_sign: int, day: str):

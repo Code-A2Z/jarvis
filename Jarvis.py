@@ -1,7 +1,8 @@
 import streamlit as st
 
-from src.helpers.structPages import structPages
 from src.helpers.getFolders import getFolders
+from src.helpers.structPages import structPages
+
 
 def application():
   pages = {

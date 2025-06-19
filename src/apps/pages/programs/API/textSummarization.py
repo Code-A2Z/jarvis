@@ -1,9 +1,10 @@
-import streamlit as st
-from groq import Groq
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import streamlit as st
+from groq import Groq
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
     ### How to get your Groq API Key:

@@ -1,6 +1,7 @@
-import streamlit as st
-import requests
 import os
+
+import requests
+import streamlit as st
 
 URL="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLPUts_2rBVRVTrLlcB54Hwi6Ws51UWLXU"
 BLOG_URL="https://avdhesh-portfolio.netlify.app/blog/fetch-youtube-playlist-in-reactjs"

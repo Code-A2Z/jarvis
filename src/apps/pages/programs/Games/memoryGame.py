@@ -1,5 +1,7 @@
-import streamlit as st
 import random
+
+import streamlit as st
+
 
 def memoryGame():
     # Center the title with padding using custom HTML

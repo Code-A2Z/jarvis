@@ -1,8 +1,10 @@
-import streamlit as st
-import requests
 import pickle
 
+import requests
+import streamlit as st
+
 from src.helpers.kaggle import downloadNotebookOutput
+
 
 def load_data():
   downloadNotebookOutput('avdhesh15', 'movie-recommendation-app', 'notebook')

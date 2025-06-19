@@ -1,6 +1,8 @@
-from requests import get
 from json import loads
+
 import streamlit as st
+from requests import get
+
 
 def joke():
   response = get('https://official-joke-api.appspot.com/random_joke')

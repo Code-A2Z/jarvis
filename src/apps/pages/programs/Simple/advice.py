@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def advice():
   res = requests.get("https://api.adviceslip.com/advice").json()

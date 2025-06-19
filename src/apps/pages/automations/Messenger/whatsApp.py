@@ -1,11 +1,13 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
+
 
 # TODO: Rectify the error in the sendMsg function
 def sendMsg(phone_no, message):
-  import pywhatkit
-  import pyautogui
   import time
+
+  import pyautogui
+  import pywhatkit
   pywhatkit.sendwhatmsg_instantly(phone_no, message)
   time.sleep(1)
   pyautogui.press('enter')

@@ -1,8 +1,8 @@
-import streamlit as st
 import requests
+import streamlit as st
 
-from src.helpers.displayInstructions import showInstructions
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 ### How to get your Wolfram Alpha API Key:

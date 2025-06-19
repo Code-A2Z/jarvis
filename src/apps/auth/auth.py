@@ -1,9 +1,11 @@
 from datetime import datetime
-import streamlit as st
 from time import sleep
+
 import pytz
+import streamlit as st
 
 from src.utils.greeting import GreetUser
+
 
 def unix_to_ist(timestamp):
   india_tz = pytz.timezone('Asia/Kolkata')

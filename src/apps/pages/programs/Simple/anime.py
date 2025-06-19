@@ -1,5 +1,5 @@
-import streamlit as st
 import requests
+import streamlit as st
 
 BASE_URL = "https://api.jikan.moe/v4"
 ALL_GENRES = {

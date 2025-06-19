@@ -1,7 +1,8 @@
-from barcode.writer import ImageWriter
-from barcode import EAN13, EAN8, UPCA
-import streamlit as st
 import io
+
+import streamlit as st
+from barcode import EAN8, EAN13, UPCA
+from barcode.writer import ImageWriter
 
 BARCODE_TYPE = {"EAN-13": [13, EAN13], "EAN-8": [8, EAN8], "UPCA": [12, UPCA]}
 

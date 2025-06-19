@@ -1,4 +1,5 @@
 import random
+
 import streamlit as st
 
 HANGMAN_FIGURES = [

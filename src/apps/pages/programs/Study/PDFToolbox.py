@@ -1,5 +1,6 @@
-import streamlit as st
 import PyPDF2
+import streamlit as st
+
 
 def readPDF():
   file = st.file_uploader("Upload a PDF file", type=["pdf"])

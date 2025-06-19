@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def shift_char(c, s):
   if c.isupper():
     return chr((ord(c) - 65 + s) % 26 + 65)

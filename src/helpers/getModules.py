@@ -1,6 +1,9 @@
 import os
+
 import streamlit as st
+
 from src.helpers.camelToReadable import camelToReadable
+
 
 def getModules(COMMON_MODULE_PATH):
   try:

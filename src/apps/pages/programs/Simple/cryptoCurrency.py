@@ -1,6 +1,6 @@
-import streamlit as st
 import plotly.express as px
 import requests
+import streamlit as st
 
 BASE_URL = "https://api.coingecko.com/api/v3"
 

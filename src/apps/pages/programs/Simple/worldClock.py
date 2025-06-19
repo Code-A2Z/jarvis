@@ -1,6 +1,7 @@
 from datetime import datetime
-import streamlit as st
+
 import pytz
+import streamlit as st
 
 cities = {
   "Auckland": "Pacific/Auckland",

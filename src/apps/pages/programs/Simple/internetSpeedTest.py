@@ -1,5 +1,6 @@
-import streamlit as st
 import speedtest
+import streamlit as st
+
 
 def internetSpeedTest():
   if st.button("🏃‍➡️ Run Speed Test"):

@@ -1,10 +1,12 @@
-import pygame
 import random
 import time
-import streamlit as st
-from PIL import Image
+
 import keyboard
 import numpy as np
+import pygame
+import streamlit as st
+from PIL import Image
+
 
 def dodgeGame():
 # Pygame Initialization (Headless Mode)

@@ -1,6 +1,7 @@
 import streamlit as st
 from PyMultiDictionary import MultiDictionary
 
+
 def dictionary():
   word = st.text_input("Enter the Word", placeholder="Type a word to get its meaning, synonym, or antonym")
   if st.button('Search dictionary') and word:

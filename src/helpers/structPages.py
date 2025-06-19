@@ -1,10 +1,11 @@
-import streamlit as st
 import importlib
 import random
 import re
 
-from src.helpers.getModules import getModules
+import streamlit as st
+
 from src.helpers.getFolders import getFolders
+from src.helpers.getModules import getModules
 
 icons = [
   ":material/api:",

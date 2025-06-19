@@ -1,6 +1,8 @@
-from github import Github
-import streamlit as st
 import subprocess
+
+import streamlit as st
+from github import Github
+
 
 def createRepository(user):
     repoName = st.text_input("Enter the repository name")

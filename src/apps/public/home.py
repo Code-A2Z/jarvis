@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def home():
 	st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
 	st.toast("Welcome to Jarvis!", icon="👋")

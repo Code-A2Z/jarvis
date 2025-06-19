@@ -1,8 +1,8 @@
-import tensorflow as tf
-import streamlit as st
-from PIL import Image
-import numpy as np
 import gdown
+import numpy as np
+import streamlit as st
+import tensorflow as tf
+from PIL import Image
 
 breed_labels = [
   'affenpinscher', 'afghan_hound', 'african_hunting_dog', 'airedale',

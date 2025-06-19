@@ -1,10 +1,11 @@
-import google.generativeai as genai
-import streamlit as st
 import base64
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import google.generativeai as genai
+import streamlit as st
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 To get started, obtain an API key from [Google - Gemini Vision API](https://makersuite.google.com/app/apikey)

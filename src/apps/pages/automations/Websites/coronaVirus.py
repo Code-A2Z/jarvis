@@ -1,7 +1,8 @@
-import streamlit as st
-import requests
 import bs4
 import plotly.graph_objs as go
+import requests
+import streamlit as st
+
 
 def getCountries():
   url = "https://www.worldometers.info/coronavirus/"

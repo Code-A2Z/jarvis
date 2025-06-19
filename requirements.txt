@@ -20,3 +20,6 @@ streamlit
 tensorflow
 tf_keras
 transformers
+flake8
+black
+isort

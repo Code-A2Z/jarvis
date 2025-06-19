@@ -1,6 +1,8 @@
-import streamlit as st
-import qrcode
 import io
+
+import qrcode
+import streamlit as st
+
 
 def QRCodeGenerator():
   input_data = st.text_area("Enter data for the QR Code (text, link, number, etc.)")

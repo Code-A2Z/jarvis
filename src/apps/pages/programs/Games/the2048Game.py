@@ -1,6 +1,8 @@
-import streamlit as st
-import numpy as np
 import random
+
+import numpy as np
+import streamlit as st
+
 
 def the2048Game():
         # Add a new tile (2 or 4) to a random empty cell

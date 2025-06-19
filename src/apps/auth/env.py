@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def displayStreamlitSecrets(data, prefix=""):
   for key, value in data.items():
     full_key = f"{prefix}{key}"

@@ -1,5 +1,6 @@
-import streamlit as st
 import math
+
+import streamlit as st
 
 MATH_CONTEXT = {
   "sin": math.sin,

@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def fetch_location_from_ip(ip_address):
   url = f"http://ip-api.com/json/{ip_address}"

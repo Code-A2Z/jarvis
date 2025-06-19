@@ -1,9 +1,10 @@
-import google.generativeai as genai
-import streamlit as st
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import google.generativeai as genai
+import streamlit as st
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 Obtain an API key from [Google](https://ai.google.dev/gemini-api) and Enter it here.

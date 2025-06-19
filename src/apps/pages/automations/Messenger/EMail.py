@@ -1,6 +1,8 @@
-from email.mime.text import MIMEText
-import streamlit as st
 import smtplib
+from email.mime.text import MIMEText
+
+import streamlit as st
+
 
 def EMail():
   st.markdown("#### Welcome to E-mail Automation")

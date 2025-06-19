@@ -1,6 +1,7 @@
 import streamlit as st
 from transformers import pipeline
 
+
 @st.cache_resource(show_spinner=True)
 def load_summarizer():
   return pipeline("summarization", model="t5-small")

@@ -1,10 +1,11 @@
-from spotipy.oauth2 import SpotifyClientCredentials
-import streamlit as st
-import spotipy
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import spotipy
+import streamlit as st
+from spotipy.oauth2 import SpotifyClientCredentials
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 ### How to get your Spotify Client ID and Secret:

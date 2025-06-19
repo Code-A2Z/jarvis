@@ -1,5 +1,7 @@
-import streamlit as st
 import time
+
+import streamlit as st
+
 
 def timer():
   st.info("This is a simple timer application.", icon="⏳")

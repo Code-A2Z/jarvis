@@ -1,6 +1,8 @@
-import streamlit as st
 import random
 import string
+
+import streamlit as st
+
 
 def generate_password(length, upper, lower, digits, special):
   chars = (

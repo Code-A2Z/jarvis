@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def get_quote():
   response = requests.get("https://zenquotes.io/api/today")

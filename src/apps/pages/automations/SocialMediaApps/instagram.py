@@ -1,8 +1,9 @@
-from instabot import Bot
-import streamlit as st
-import instaloader
-import random
 import os
+import random
+
+import instaloader
+import streamlit as st
+from instabot import Bot
 
 loader = instaloader.Instaloader()
 

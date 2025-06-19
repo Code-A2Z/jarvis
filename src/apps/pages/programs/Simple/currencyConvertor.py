@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def get_exchange_rates():
   url = "https://api.frankfurter.app/currencies"

@@ -1,6 +1,7 @@
-import streamlit as st
-import pyshorteners
 import pyperclip
+import pyshorteners
+import streamlit as st
+
 
 def shorten_url(input_url):
   shortener = pyshorteners.Shortener()

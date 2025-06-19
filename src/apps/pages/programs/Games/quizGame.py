@@ -1,6 +1,8 @@
-import streamlit as st
-import requests
 import random
+
+import requests
+import streamlit as st
+
 
 def quizGame():
     st.title("Dynamic Quiz Generator")

@@ -1,6 +1,8 @@
-from requests import get
 from json import loads
+
 import streamlit as st
+from requests import get
+
 
 def fact():
   response = get('https://uselessfacts.jsph.pl/api/v2/facts/random')
