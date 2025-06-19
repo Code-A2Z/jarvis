@@ -189,13 +189,16 @@ def snakeGame():
     </body>
     </html>
     """
-    
+
     components.html(game_html, height=650)
 
-    st.markdown("""
+    st.markdown(
+        """
     <style>
         .stMarkdown {
             text-align: center;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )

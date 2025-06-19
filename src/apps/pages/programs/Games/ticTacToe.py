@@ -1,6 +1,8 @@
-import streamlit as st
-import numpy as np
 import random
+
+import numpy as np
+import streamlit as st
+
 
 # Function to check rows for a winner
 def checkRows(board):
@@ -9,13 +11,18 @@ def checkRows(board):
             return row[0]
     return None
 
+
 # Function to check diagonals for a winner
 def checkDiagonals(board):
     if len(set([board[i][i] for i in range(len(board))])) == 1 and board[0][0] != ".":
         return board[0][0]
-    if len(set([board[i][len(board) - i - 1] for i in range(len(board))])) == 1 and board[0][len(board) - 1] != ".":
+    if (
+        len(set([board[i][len(board) - i - 1] for i in range(len(board))])) == 1
+        and board[0][len(board) - 1] != "."
+    ):
         return board[0][len(board) - 1]
     return None
+
 
 # Function to check if there is a winner
 def checkWin(board):
@@ -25,13 +32,17 @@ def checkWin(board):
             return result
     return checkDiagonals(board)
 
+
 # Function to check if the board is full
 def checkDraw(board):
     return not any("." in row for row in board)
 
+
 # Function to randomly decide who starts the game
 def decide_start():
     return random.choice(["player", "jarvis"])
+
+
 # Function for Jarvis to make a move
 def check_winning_move(board, symbol):
     for i in range(3):
@@ -100,6 +111,7 @@ def jarvis_move():
             st.session_state.current_turn = "player"
             st.session_state.next_player = st.session_state.player_symbol
 
+
 # Main Tic Tac Toe game function
 def ticTacToe():
     st.title("🎮 Tic Tac Toe Game 🎮")
@@ -129,7 +141,11 @@ def ticTacToe():
 
     # Function to handle button click and game logic
     def handle_click(i, j):
-        if not st.session_state.winner and not st.session_state.draw and st.session_state.board[i, j] == ".":
+        if (
+            not st.session_state.winner
+            and not st.session_state.draw
+            and st.session_state.board[i, j] == "."
+        ):
             st.session_state.board[i, j] = st.session_state.next_player
             winner = checkWin(st.session_state.board)
             if winner:
@@ -146,7 +162,9 @@ def ticTacToe():
                     st.session_state.next_player = st.session_state.player_symbol
 
     # Display player symbols outside the game area
-    st.write(f"You: {st.session_state.player_symbol} | Jarvis: {st.session_state.jarvis_symbol}")
+    st.write(
+        f"You: {st.session_state.player_symbol} | Jarvis: {st.session_state.jarvis_symbol}"
+    )
 
     # Display the Tic Tac Toe board with enhanced UI elements
     with st.container():
@@ -176,11 +194,17 @@ def ticTacToe():
         st.write("")
         st.subheader("Game Status")
         if st.session_state.winner:
-            st.success(f"🎉 Congratulations! {st.session_state.winner} won the game! 🎉")
+            st.success(
+                f"🎉 Congratulations! {st.session_state.winner} won the game! 🎉"
+            )
         elif st.session_state.draw:
             st.warning("It's a draw! 🤝")
         else:
-            turn_message = "Your turn" if st.session_state.current_turn == "player" else "Jarvis's turn"
+            turn_message = (
+                "Your turn"
+                if st.session_state.current_turn == "player"
+                else "Jarvis's turn"
+            )
             st.write(turn_message)
 
     # button to restart the game

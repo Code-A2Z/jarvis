@@ -1,10 +1,12 @@
-from instabot import Bot
-import streamlit as st
-import instaloader
-import random
 import os
+import random
+
+import instaloader
+import streamlit as st
+from instabot import Bot
 
 loader = instaloader.Instaloader()
+
 
 def likeUserPosts(username):
     password = st.text_input("Enter your Instagram password", type="password")
@@ -16,12 +18,15 @@ def likeUserPosts(username):
         if not user_posts:
             st.warning("No posts found to like!")
             return
-        num_posts_to_like = st.slider("Select the number of posts to like", 1, len(user_posts))
+        num_posts_to_like = st.slider(
+            "Select the number of posts to like", 1, len(user_posts)
+        )
         posts_to_like = random.sample(user_posts, num_posts_to_like)
         for post in posts_to_like:
             bot.like(media_id=post)
         bot.logout()
         st.success(f"Liked {num_posts_to_like} posts from {username}.", icon="👍")
+
 
 def followUser(username):
     password = st.text_input("Enter your Instagram password", type="password")
@@ -34,6 +39,7 @@ def followUser(username):
             st.error(f"Failed to follow user: {username}.", icon="❌")
         bot.logout()
 
+
 def unfollowUser(username):
     password = st.text_input("Enter your Instagram password", type="password")
     if password:
@@ -45,6 +51,7 @@ def unfollowUser(username):
             st.error(f"Failed to unfollow user: {username}.", icon="❌")
         bot.logout()
 
+
 def sendDirectMessage(username, message):
     password = st.text_input("Enter your Instagram password", type="password")
     if password:
@@ -55,31 +62,42 @@ def sendDirectMessage(username, message):
         bot.logout()
         st.success(f"Sent message to {username}.", icon="✉️")
 
+
 def profileIDNumber(username):
     profile = instaloader.Profile.from_username(loader.context, username)
     st.success(f"Your profile ID is: {profile.userid}", icon="🆔")
 
+
 def downloadProfilePicture(username):
     loader.download_profile(username, profile_pic_only=True)
     profile_dir = os.path.join(os.getcwd(), username)
-    image = [os.path.join(profile_dir, img) for img in os.listdir(profile_dir) if img.endswith(".jpg")]
+    image = [
+        os.path.join(profile_dir, img)
+        for img in os.listdir(profile_dir)
+        if img.endswith(".jpg")
+    ]
     st.image(image[0], caption=f"Profile picture of {username}")
     st.success(f"Profile picture of {username} downloaded.", icon="📸")
+
 
 def downloadUserData(username):
     profile = instaloader.Profile.from_username(loader.context, username)
     loader.download_profile(profile.username, download_stories=True, fast_update=True)
     st.success(f"Downloaded posts and stories of {username}.", icon="📥")
 
+
 def instagram():
     st.title("Instagram Automation 🤖")
-    st.write("Automate tasks like liking posts, following/unfollowing users, sending messages, downloading profile pictures, and more!")
+    st.write(
+        "Automate tasks like liking posts, following/unfollowing users, sending messages, downloading profile pictures, and more!"
+    )
 
     username = st.text_input("Enter your Instagram username")
 
     if username:
         task = st.selectbox(
-            "Choose a task", [
+            "Choose a task",
+            [
                 None,
                 "Know your profile ID number",
                 "Download a user's profile picture",
@@ -88,7 +106,7 @@ def instagram():
                 "Unfollow a user",
                 "Send a direct message to a user",
                 "Download a user's recent posts and stories",
-            ]
+            ],
         )
 
         if task == "Know your profile ID number":

@@ -1,13 +1,15 @@
-import pygame
 import random
 import time
-import streamlit as st
-from PIL import Image
+
 import keyboard
 import numpy as np
+import pygame
+import streamlit as st
+from PIL import Image
+
 
 def dodgeGame():
-# Pygame Initialization (Headless Mode)
+    # Pygame Initialization (Headless Mode)
     pygame.init()
     SCREEN_WIDTH, SCREEN_HEIGHT = 200, 200
     PLAYER_WIDTH, PLAYER_HEIGHT = 25, 25
@@ -23,15 +25,15 @@ def dodgeGame():
         st.session_state.move_direction = direction
 
     # Initialize session state variables
-    if 'game_active' not in st.session_state:
+    if "game_active" not in st.session_state:
         st.session_state.game_active = False
-    if 'game_over' not in st.session_state:
+    if "game_over" not in st.session_state:
         st.session_state.game_over = False
-    if 'score' not in st.session_state:
+    if "score" not in st.session_state:
         st.session_state.score = 0
-    if 'player_x' not in st.session_state:
+    if "player_x" not in st.session_state:
         st.session_state.player_x = SCREEN_WIDTH // 2 - PLAYER_WIDTH // 2
-    if 'last_score' not in st.session_state:
+    if "last_score" not in st.session_state:
         st.session_state.last_score = None
 
     def reset_game():
@@ -51,10 +53,10 @@ def dodgeGame():
         center_x = x + width // 2
         center_y = y + height // 2
         pygame.draw.circle(surface, BLACK, (center_x, center_y), bomb_radius)
-        
+
         # Draw the fuse on top (brown)
         fuse_start = (center_x, center_y - bomb_radius)
-        fuse_end = (center_x + width//4, center_y - bomb_radius - height//4)
+        fuse_end = (center_x + width // 4, center_y - bomb_radius - height // 4)
         pygame.draw.line(surface, (139, 69, 19), fuse_start, fuse_end, 3)
 
     def dodge_the_blocks():
@@ -63,7 +65,7 @@ def dodgeGame():
         blocks = []
         block_speed = 2
         start_time = time.time()
-        
+
         score_display = st.empty()
         game_frame = st.empty()
 
@@ -71,14 +73,21 @@ def dodgeGame():
             screen.fill(WHITE)
 
             # Player Control using keyboard
-            if keyboard.is_pressed('left') and st.session_state.player_x > 0:
+            if keyboard.is_pressed("left") and st.session_state.player_x > 0:
                 st.session_state.player_x -= player_speed
-            if keyboard.is_pressed('right') and st.session_state.player_x < SCREEN_WIDTH - PLAYER_WIDTH:
+            if (
+                keyboard.is_pressed("right")
+                and st.session_state.player_x < SCREEN_WIDTH - PLAYER_WIDTH
+            ):
                 st.session_state.player_x += player_speed
 
             # Draw Player
-            pygame.draw.rect(screen, BLACK, (st.session_state.player_x, player_y, PLAYER_WIDTH, PLAYER_HEIGHT))
-            
+            pygame.draw.rect(
+                screen,
+                BLACK,
+                (st.session_state.player_x, player_y, PLAYER_WIDTH, PLAYER_HEIGHT),
+            )
+
             # Spawn and Move Blocks
             if random.randint(1, 45) == 1:
                 block_x = random.randint(0, SCREEN_WIDTH - BLOCK_WIDTH)
@@ -87,12 +96,14 @@ def dodgeGame():
             for block in blocks[:]:
                 block[1] += block_speed
                 draw_bomb(screen, block[0], block[1], BLOCK_WIDTH, BLOCK_HEIGHT)
-                
+
                 # Collision Detection
-                if (block[1] + BLOCK_HEIGHT > player_y and 
-                    block[1] < player_y + PLAYER_HEIGHT and 
-                    block[0] < st.session_state.player_x + PLAYER_WIDTH and 
-                    block[0] + BLOCK_WIDTH > st.session_state.player_x):
+                if (
+                    block[1] + BLOCK_HEIGHT > player_y
+                    and block[1] < player_y + PLAYER_HEIGHT
+                    and block[0] < st.session_state.player_x + PLAYER_WIDTH
+                    and block[0] + BLOCK_WIDTH > st.session_state.player_x
+                ):
                     st.session_state.score = int(time.time() - start_time)
                     st.session_state.game_over = True
                     st.session_state.game_active = False
@@ -107,12 +118,13 @@ def dodgeGame():
             # Convert Pygame surface to numpy array and then to PIL Image
             frame = pygame.surfarray.array3d(screen)
             frame = frame.swapaxes(0, 1)
-            image = Image.fromarray(frame.astype('uint8'))
+            image = Image.fromarray(frame.astype("uint8"))
             game_frame.image(image, use_container_width=True)
 
             # Update Score Display
             current_score = int(time.time() - start_time)
-            score_display.markdown(f"""
+            score_display.markdown(
+                f"""
                 <div style="
                     display: inline-block;
                     background-color: rgba(187, 173, 160, 0.1);
@@ -142,7 +154,9 @@ def dodgeGame():
                         {current_score}
                     </div>
                 </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
             clock.tick(FPS)
 
@@ -156,7 +170,7 @@ def dodgeGame():
     if st.session_state.game_over:
         # Clear any previous content
         game_area.empty()
-        
+
         # Show game over message in game area
         with game_area.container():
             st.error("💥 GAME OVER!")
@@ -168,7 +182,7 @@ def dodgeGame():
     elif not st.session_state.game_active:
         # Clear any previous content
         game_area.empty()
-        
+
         # Show start game button
         with game_area.container():
             st.write("Use the **LEFT and RIGHT arrow keys** to move!")
@@ -178,7 +192,7 @@ def dodgeGame():
     elif st.session_state.game_active:
         # Clear any previous content
         game_area.empty()
-        
+
         # Show game instructions and run game
         st.write("Use the **LEFT and RIGHT arrow keys** to move!")
         dodge_the_blocks()
