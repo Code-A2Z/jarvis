@@ -18,12 +18,10 @@ api_guide = """
 2. Sign up or log in with your account.
 3. Navigate to the **API Keys** section.
 4. Click on **+ Create Key** to generate a new API key.
-5. Copy the key and paste it in your `.env` or secret config.
 
 #### How to get your Google API Key:
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey).
 2. Generate an API key for Generative AI access.
-3. Paste it into your `.env` or Streamlit secrets.
 """
 
 @st.cache_resource(show_spinner=True)
@@ -117,6 +115,3 @@ def chatWithYourPDF():
                     st.write(ai_message)
                 except Exception as e:
                     st.error(f"❌ Error generating response: {str(e)}")
-
-if __name__ == "__main__":
-    chatWithYourPDF()
