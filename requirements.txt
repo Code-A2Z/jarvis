@@ -1,8 +1,14 @@
 Authlib
 deep-translator
+faiss-cpu
 google-generativeai
 groq
 kaggle
+langchain_community
+langchain_core
+langchain_google_genai
+langchain_groq
+langchain_text_splitters
 matplotlib
 Pint
 plotly
