@@ -1,6 +1,7 @@
 Authlib
 deep-translator
 google-generativeai
+groq
 kaggle
 matplotlib
 Pint
