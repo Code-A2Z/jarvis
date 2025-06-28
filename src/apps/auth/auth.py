@@ -13,26 +13,33 @@ def unix_to_ist(timestamp):
 def auth():
     if st.user and not st.user.is_logged_in:
         st.title("🔐 Login Required")
-        st.write("Please authenticate using your preferred account to access your profile.")
+        st.write("Please authenticate to access your profile.")
 
-        # Dual login options: Google and GitHub
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("🔓 Login with Google"):
+        provider = st.selectbox("Choose login provider", ["Google", "GitHub"])
+        login_btn = st.button("🔓 Authenticate")
+
+        if login_btn:
+            if provider == "Google":
                 st.login("google")
-
-        with col2:
-            if st.button("🐱 Login with GitHub"):
+            elif provider == "GitHub":
                 st.login("github")
 
     else:
-        st.title(f"🙏 {GreetUser(st.user.given_name)}")
+        # Attribute fallbacks to prevent crashes
+        given_name = getattr(st.user, "given_name", None) or getattr(st.user, "name", "User")
+        full_name = getattr(st.user, "name", given_name)
+        picture = getattr(st.user, "picture", None)
+        email = getattr(st.user, "email", "N/A")
+
+        st.title(f"🙏 {GreetUser(given_name)}")
         st.success("Welcome to Jarvis AI Assistant!", icon="🤝")
-        st.image(st.user.picture, caption=st.user.name)
-        st.write("Email:", st.user.email)
+
+        if picture:
+            st.image(picture, caption=full_name)
+        st.write("Email:", email)
 
         if st.button("Log out"):
-            st.toast(f"Goodbye, {st.user.name}! See you soon!", icon="🚪")
+            st.toast(f"Goodbye, {full_name}! See you soon!", icon="🚪")
             sleep(2)
             st.logout()
 
