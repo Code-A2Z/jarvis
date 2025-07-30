@@ -31,3 +31,4 @@ def application():
   return st.navigation(pages)
 
 application().run()
+
