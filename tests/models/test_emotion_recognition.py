@@ -1,8 +1,13 @@
 import os
+import sys
 import numpy as np
 import cv2
 import pytest
 from unittest.mock import patch, MagicMock
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+if PROJECT_ROOT not in sys.path:
+    sys.path.append(PROJECT_ROOT)
 
 from src.apps.pages.models.ImageProcessing import emotion_recognition as er
 
