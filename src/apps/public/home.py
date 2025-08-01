@@ -1,4 +1,5 @@
 import streamlit as st
+import subprocess
 
 def home():
   st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
@@ -26,6 +27,9 @@ def home():
   - [GitHub Repository](https://github.com/Code-A2Z/Jarvis) - Contribute to the development or get the latest version.
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLPUts_2rBVRVTrLlcB54Hwi6Ws51UWLXU) - Watch tutorials and feature demonstrations.
   """)
+  
+  if st.button(" :books: Spelling Checker"):
+    subprocess.run(["streamlit", "run", "src/apps/pages/models/Utility/checker.py"])
 
   st.markdown("""
   ---
