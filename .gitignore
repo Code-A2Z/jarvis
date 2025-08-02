@@ -19,3 +19,5 @@ myenv
 *.caffemodel
 *.pt
 *.log
+
+.env

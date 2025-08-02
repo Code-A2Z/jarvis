@@ -21,8 +21,8 @@ pypdf
 PyPDF2
 pyperclip
 pyshorteners
-pytest
 python-barcode
+python-dotenv
 pytz
 qrcode
 speedtest-cli
