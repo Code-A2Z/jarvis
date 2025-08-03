@@ -4,16 +4,11 @@ from src.helpers.structPages import structPages
 from src.helpers.getFolders import getFolders
 
 
-print(getFolders("src/apps/pages"))
-
-
 def application():
   pages = {
     "": [
       st.Page("src/apps/public/home.py", title="Home", icon=":material/home:"),
       st.Page("src/apps/public/youtubePlaylist.py", title="Jarvis Videos", icon=":material/ondemand_video:"),
-      st.Page("src/apps/public/emotionRecognitionModel.py", title="Emotion Recognition", icon=":material/mood:")
-
     ],
     "Account": [
       st.Page("src/apps/auth/auth.py", title="Authentication", icon=":material/lock_open:"),

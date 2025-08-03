@@ -1,4 +1,5 @@
 import os
+import sys
 import cv2
 import numpy as np
 import streamlit as st
@@ -16,6 +17,11 @@ load_dotenv()
 MODEL_FOLDER = Path("src/apps/pages/models/ImageProcessing/model_files")
 MODEL_FILENAME = "best_emotion_model.keras"
 MODEL_PATH = MODEL_FOLDER / MODEL_FILENAME
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../../"))
+if PROJECT_ROOT not in sys.path:
+    sys.path.append(PROJECT_ROOT)
+
 EMOTION_LABELS = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
 # GPU setup
@@ -119,3 +125,5 @@ def emotionRecognitionModel():
                 st.success(f"Predicted Emotion: {emotion} ({confidence:.2%})")
 
     st.caption("This page supports both DeepFace and custom-trained models with Kaggle integration.")
+
+emotionRecognitionModel()
