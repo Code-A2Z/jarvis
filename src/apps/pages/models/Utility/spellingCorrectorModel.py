@@ -45,14 +45,14 @@ custom_dict = {
 
 # Initialize T5 model and tokenizer
 @st.cache_resource
-def load_model():
+def loadModel():
     model = T5ForConditionalGeneration.from_pretrained("vennify/t5-base-grammar-correction")
     tokenizer = T5Tokenizer.from_pretrained("vennify/t5-base-grammar-correction")
     return model, tokenizer
 
 
 # Fallback spell correction using Levenshtein distance
-def correct_word_fallback(word, max_distance=3):
+def correctWordFallback(word, max_distance=3):
     """Correct a single word using edit distance with higher threshold."""
     if word.lower() in word_list:
         return word
@@ -67,7 +67,7 @@ def correct_word_fallback(word, max_distance=3):
 
 
 # Spell and grammar correction using T5
-def correct_spelling(text, model, tokenizer):
+def correctSpelling(text, model, tokenizer):
     """Correct spelling and grammar using T5 model with custom dictionary."""
     # Step 1: Apply custom dictionary corrections
     corrected_text = text
@@ -91,7 +91,7 @@ def correct_spelling(text, model, tokenizer):
     for token in tokens:
         is_capitalized = token[0].isupper() if token else False
         is_all_caps = token.isupper() if token else False
-        corrected_token = correct_word_fallback(token.lower())
+        corrected_token = correctWordFallback(token.lower())
         if is_all_caps:
             corrected_token = corrected_token.upper()
         elif is_capitalized:
@@ -113,20 +113,18 @@ def correct_spelling(text, model, tokenizer):
 
 
 # Streamlit UI
-def checker():
-    st.title("Spell Checker")
+def spellingCorrectorModel():
+    # st.title("Spell Checker")
     st.write("Enter text below to correct spelling and grammar. Select the corrected text and press Ctrl+C to copy.")
     # Input text area
     input_text = st.text_area("Enter Text:", height=150, placeholder="e.g., I hav a problm with speling")
     # Correct button
     if st.button("Correct Spelling"):
         if input_text.strip():
-            model, tokenizer = load_model()
+            model, tokenizer = loadModel()
             with st.spinner("Correcting text..."):
-                corrected = correct_spelling(input_text, model, tokenizer)
+                corrected = correctSpelling(input_text, model, tokenizer)
             st.session_state['corrected_text'] = corrected  # Store in session state
             st.text_area("Corrected Text (select and press Ctrl+C to copy):", value=corrected, height=150, disabled=False, key="corrected_text_area")
         else:
             st.warning("Please enter some text to correct.")
-
-checker()
