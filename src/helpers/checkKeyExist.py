@@ -14,7 +14,12 @@ def isKeyExist(keys, folder=None):
   """
   if isinstance(keys, str):
     keys = [keys]
-  secrets = st.secrets.get(folder, {}) if folder else st.secrets
+  
+  try:
+    secrets = st.secrets.get(folder, {}) if folder else st.secrets
+  except FileNotFoundError:
+    secrets = {}
+  
   result = {}
   for key in keys:
     result[key] = bool(secrets.get(key) or os.environ.get(key))

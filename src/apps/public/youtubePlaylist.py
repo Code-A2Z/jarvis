@@ -48,7 +48,14 @@ def youtubePlaylist():
     st.error("YouTube API key not found. Please add your API key to the secrets manager.", icon="🚨")
     st.stop()
 
-  API_KEY = (st.secrets['api_key']["YOUTUBE_API_KEY"] or os.environ["YOUTUBE_API_KEY"])
+  try:
+    API_KEY = (st.secrets['api_key']["YOUTUBE_API_KEY"] or os.environ.get("YOUTUBE_API_KEY"))
+  except FileNotFoundError:
+    API_KEY = os.environ.get("YOUTUBE_API_KEY")
+    if not API_KEY:
+      st.error("YouTube API key not found in environment variables.", icon="🚨")
+      st.stop()
+      
   if st.button("Show Videos"):
     videos = youtubePlaylistVideos(API_KEY)
     displayVideos(videos)

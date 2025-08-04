@@ -24,8 +24,14 @@ def downloadNotebookOutput(username, notebook_name, folder_name, version=None):
   if not exists['KAGGLE_USERNAME'] or not exists['KAGGLE_KEY']:
     st.error("Kaggle credentials are missing. Please set them in Streamlit secrets.", icon="🚨")
     st.stop()
-  os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
-  os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+  
+  try:
+    os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
+    os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+  except FileNotFoundError:
+    st.error("Kaggle credentials not found in secrets file.", icon="🚨")
+    st.stop()
+    
   version_arg = f"--version {version}" if version else ""
   os.system(f"kaggle kernels output {username}/{notebook_name} -p {folder_name} {version_arg}")
 
@@ -49,7 +55,13 @@ def downloadDataset(dataset_name, version=None):
   if not exists['KAGGLE_USERNAME'] or not exists['KAGGLE_KEY']:
     st.error("Kaggle credentials are missing. Please set them in Streamlit secrets.", icon="🚨")
     st.stop()
-  os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
-  os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+    
+  try:
+    os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
+    os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+  except FileNotFoundError:
+    st.error("Kaggle credentials not found in secrets file.", icon="🚨")
+    st.stop()
+    
   version_arg = f"--version {version}" if version else ""
   os.system(f"kaggle datasets download -d {dataset_name} {version_arg}")

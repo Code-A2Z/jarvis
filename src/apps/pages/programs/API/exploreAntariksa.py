@@ -227,7 +227,14 @@ def exploreAntariksa():
     st.stop()
 
   choice = st.selectbox("What Would You Like To Know?", [None, "Space News", "Mars Image", "Asteroids", "Solar Bodies"])
-  NASA_API_KEY = (os.environ.get("NASA_API_KEY", "") or st.secrets['api_key']["NASA_API_KEY"])
+  
+  try:
+    NASA_API_KEY = (os.environ.get("NASA_API_KEY", "") or st.secrets['api_key']["NASA_API_KEY"])
+  except FileNotFoundError:
+    NASA_API_KEY = os.environ.get("NASA_API_KEY", "")
+    if not NASA_API_KEY and choice in ["Space News", "Mars Image", "Asteroids"]:
+      st.error("NASA API key not found in environment variables.", icon="🚨")
+      st.stop()
 
   if choice == "Space News":
     SpaceNews(NASA_API_KEY)

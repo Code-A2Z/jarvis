@@ -13,7 +13,11 @@ api_guide = """
 """
 
 WOLFRAM_URL = "http://api.wolframalpha.com/v2/query"
-WOLFRAM_API_KEY = st.secrets["api_key"]["WOLFRAM_API_KEY"]
+
+try:
+  WOLFRAM_API_KEY = st.secrets["api_key"]["WOLFRAM_API_KEY"]
+except (KeyError, FileNotFoundError):
+  WOLFRAM_API_KEY = None
 
 def calculate_expression(query):
   params = {'input': query, 'format': 'image,plaintext', 'output': 'JSON', 'appid': WOLFRAM_API_KEY}
@@ -34,7 +38,7 @@ def display_plots(pods):
   for pod in pods:
     if 'img' in pod['subpods'][0]:
       image_url = pod['subpods'][0]['img']['src']
-      st.image(image_url, caption=pod['title'], use_container_width=True)
+      st.image(image_url, caption=pod['title'], width=500)
 
 def display_results(pods):
   if pods:

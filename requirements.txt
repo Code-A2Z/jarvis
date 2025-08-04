@@ -23,7 +23,7 @@ pytz
 qrcode
 speedtest-cli
 spotipy
-streamlit
+streamlit==1.38.0
 tensorflow
 tf_keras
 transformers

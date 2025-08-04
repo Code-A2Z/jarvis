@@ -39,7 +39,14 @@ def genAIChatbot():
     prompt = None
     st.stop()
 
-  GEMINI_API_KEY = (st.secrets['api_key']["GEMINI_API_KEY"] or os.environ["GEMINI_API_KEY"])
+  try:
+    GEMINI_API_KEY = (st.secrets['api_key']["GEMINI_API_KEY"] or os.environ.get("GEMINI_API_KEY"))
+  except FileNotFoundError:
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+    if not GEMINI_API_KEY:
+      st.error("Gemini API key not found in environment variables.", icon="🚨")
+      st.stop()
+      
   genai.configure(api_key=GEMINI_API_KEY)
   prompt = st.chat_input("Let's chat!")
   msg = st.chat_message("ai")

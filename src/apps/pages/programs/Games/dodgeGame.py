@@ -108,7 +108,7 @@ def dodgeGame():
             frame = pygame.surfarray.array3d(screen)
             frame = frame.swapaxes(0, 1)
             image = Image.fromarray(frame.astype('uint8'))
-            game_frame.image(image, use_container_width=True)
+            game_frame.image(image, width=400)
 
             # Update Score Display
             current_score = int(time.time() - start_time)
