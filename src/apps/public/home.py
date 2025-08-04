@@ -26,7 +26,7 @@ def home():
   - [GitHub Repository](https://github.com/Code-A2Z/Jarvis) - Contribute to the development or get the latest version.
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLPUts_2rBVRVTrLlcB54Hwi6Ws51UWLXU) - Watch tutorials and feature demonstrations.
   """)
-  
+
   st.markdown("""
   ---
   **Jarvis** is continually evolving with new features and improvements. Stay tuned for updates and feel free to contribute to its development.
