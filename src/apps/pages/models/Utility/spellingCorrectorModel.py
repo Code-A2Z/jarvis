@@ -113,7 +113,7 @@ def correctSpelling(text, model, tokenizer):
 
 
 # Streamlit UI
-def spellingCorrectorModel(input_text):
+def spellingCorrectorModel():
     # st.title("Spell Checker")
     st.write("Enter text below to correct spelling and grammar. Select the corrected text and press Ctrl+C to copy.")
     # Input text area
