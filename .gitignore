@@ -8,6 +8,10 @@ __pycache__/
 myenv
 /myenv
 
+# calendar tokens
+tokens
+/tokens
+
 # Deployed Model files
 *.keras
 *.h5
