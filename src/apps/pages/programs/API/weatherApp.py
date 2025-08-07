@@ -42,7 +42,14 @@ def weatherApp():
     showInstructions(markdown_text=api_guide, fields="WEATHER_API_KEY")
     st.stop()
 
-  api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
+  try:
+    api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
+  except FileNotFoundError:
+    api_key = os.environ.get("WEATHER_API_KEY")
+    if not api_key:
+      st.error("Weather API key not found in environment variables.", icon="🚨")
+      st.stop()
+      
   city = st.text_input("Enter City Name")
 
   if st.button("Get Weather") and city:

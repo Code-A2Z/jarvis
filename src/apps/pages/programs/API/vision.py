@@ -19,7 +19,14 @@ def vision():
     showInstructions(markdown_text=api_guide, fields="VISION_API_KEY")
     st.stop()
 
-  api_key = (st.secrets['api_key']["VISION_API_KEY"] or os.environ["VISION_API_KEY"])
+  try:
+    api_key = (st.secrets['api_key']["VISION_API_KEY"] or os.environ.get("VISION_API_KEY"))
+  except FileNotFoundError:
+    api_key = os.environ.get("VISION_API_KEY")
+    if not api_key:
+      st.error("Vision API key not found in environment variables.", icon="🚨")
+      st.stop()
+      
   genai.configure(api_key=api_key)
 
   images = st.file_uploader(

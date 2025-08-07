@@ -16,8 +16,12 @@ api_guide = """
 """
 
 def authenticateSpotify():
-  client_id = os.environ.get("SPOTIFY_CLIENT_ID") or st.secrets["spotify"]["SPOTIFY_CLIENT_ID"]
-  client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET") or st.secrets["spotify"]["SPOTIFY_CLIENT_SECRET"]
+  try:
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID") or st.secrets["spotify"]["SPOTIFY_CLIENT_ID"]
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET") or st.secrets["spotify"]["SPOTIFY_CLIENT_SECRET"]
+  except FileNotFoundError:
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
 
   if client_id and client_secret:
     auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)

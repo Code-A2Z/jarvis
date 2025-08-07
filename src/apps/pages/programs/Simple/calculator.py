@@ -79,6 +79,6 @@ def calculator():
   for row in buttons:
     cols = st.columns(4)
     for col, button in zip(cols, row):
-      if col.button(button, key=f"btn_{button}", use_container_width=True):
+      if col.button(button, key=f"btn_{button}"):
           on_button_click(button)
           st.rerun()

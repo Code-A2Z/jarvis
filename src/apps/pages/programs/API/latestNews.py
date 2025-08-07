@@ -144,7 +144,15 @@ def latestNews():
     st.stop()
 
   required = st.selectbox("Select an option", list(REQUIRED.keys()))
-  API = (st.secrets['api_key']["NEWS_API_KEY"] or os.environ["NEWS_API_KEY"])
+  
+  try:
+    API = (st.secrets['api_key']["NEWS_API_KEY"] or os.environ.get("NEWS_API_KEY"))
+  except FileNotFoundError:
+    API = os.environ.get("NEWS_API_KEY")
+    if not API:
+      st.error("News API key not found in environment variables.", icon="🚨")
+      st.stop()
+      
   if required == "Top Headlines":
     col1, col2 = st.columns(2)
     with col1:
