@@ -1,15 +1,9 @@
 Authlib
 deepface
 deep-translator
-faiss-cpu
 google-generativeai
 groq
 kaggle
-langchain_community
-langchain_core
-langchain_google_genai
-langchain_groq
-langchain_text_splitters
 matplotlib
 mtcnn
 opencv-python-headless
@@ -17,7 +11,6 @@ Pint
 plotly
 pygame
 pymultidictionary
-pypdf
 PyPDF2
 pyperclip
 pyshorteners
