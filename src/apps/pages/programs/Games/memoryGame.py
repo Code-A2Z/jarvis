@@ -132,3 +132,7 @@ def memoryGame():
         st.session_state.second_selection = None
         st.session_state.moves = 0
         st.session_state.matches_found = 0
+        
+        
+        
+memoryGame()
