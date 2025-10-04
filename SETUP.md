@@ -9,7 +9,7 @@ Welcome to the Jarvis Virtual Assistant! This guide will walk you through settin
 Ensure you have the following installed:
 
 - [Python 3.9+](https://www.python.org/downloads/)
-- [pip](https://pip.pypa.io/en/stable/)
+- [uv](https://docs.astral.sh/uv/)
 - [Git](https://git-scm.com/downloads)
 - [Streamlit](https://docs.streamlit.io/)
 
@@ -27,20 +27,18 @@ cd jarvis
 
 ---
 
-### 🧰 Set Up a Virtual Environment (Recommended)
+### 🧰 Install uv
 
 #### ▶️ Windows
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 #### 🐧 macOS/Linux
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 ---
@@ -48,7 +46,7 @@ source venv/bin/activate
 ### 🧪 Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ---
@@ -104,7 +102,7 @@ This will let you access all core features locally during development.
 Launch the application:
 
 ```bash
-streamlit run src/apps/public/home.py
+uv run streamlit run src/apps/public/home.py
 ```
 
 It should open in your browser at `http://localhost:8501`.

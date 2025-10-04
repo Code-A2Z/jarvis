@@ -1,7 +1,7 @@
 <h1 align="center">Contributors Guide⚡ </h1>
 <h3 align="center">Welcome to our open-source project! 😍<br> We appreciate your interest in contributing.😊 <br>This guide will help you get started with the project and make your first contribution.</h3>
 
---- 
+---
 
 <h1 align="center">Creating first Pull Request 🌟</h1>
 
@@ -18,47 +18,59 @@ git clone https://github.com/<your-github-username>/Jarvis.git
 cd Jarvis
 ```
 
-5. Create a virtual environment.
+5. Install Dependencies
+
+**Step 1: Install uv (Skip if Already Installed)**
+
+Choose the command for your operating system:
+
+On Linux/macOS (using Bash):
 ```bash
-python -m venv myenv
-source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-6. Install the dependencies.
-```bash
-pip install -r requirements.txt
+On Windows (using PowerShell):
+```sh
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-7. Create a new branch.
+**Step 2: Install Project Dependencies**
+
+Run this command in your project directory. It automatically creates and uses a virtual environment named `.venv`.
+```sh
+uv sync
+```
+
+6. Create a new branch.
 ```bash
 git checkout -b <your_branch_name>
 ```
 
-8. Make changes.
-9. Stage your changes and commit them.
+7. Make changes.
+8. Stage your changes and commit them.
 ```bash
 git add .
 git commit -m "<your_commit_message"
 ```
 
-10.  Push your local commits to the remote repository.
+9. Push your local commits to the remote repository.
 ```bash
 git push -u origin <your_branch_name>
 ```
 
-11.  Create your Pull Request.
-12.  Congratulations! 🎉 you've made your contribution.
+10. Create your Pull Request.
+11. Congratulations! 🎉 you've made your contribution.
 
-### Running the Application 
+### Running the Application
 
 1. Start the application.
 ```bash
-streamlit run Jarvis.py
+uv run streamlit run Jarvis.py
 ```
 2. Access the application.
 > Open your browser and navigate to `http://localhost:8501`
 
---- 
+---
 
 ### Communication and Support 💬
 - Join the project's communication channels to interact with other contributors and seek assistance.
@@ -80,7 +92,7 @@ You can refer to the following articles on basics of Git and Github and also con
 - [Getting started with Git and GitHub](https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6)
 - [Learn GitHub from Scratch](https://lab.github.com/githubtraining/introduction-to-github)
 
---- 
+---
 
 ### Note from Admin ❗
 
