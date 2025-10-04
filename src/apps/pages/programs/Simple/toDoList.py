@@ -1,7 +1,8 @@
 import streamlit as st
 
+
 def toDoList():
-  if 'tasks' not in st.session_state:
+  if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
   task_title = st.text_input("Task Title", "")
@@ -36,8 +37,8 @@ def toDoList():
         st.write(f"**{task['title']}** - {task['description']}")
       with col3:
         if st.button("❌", key=f"delete_{i}"):
-            st.session_state.tasks.remove(task)
-            st.rerun()
+          st.session_state.tasks.remove(task)
+          st.rerun()
 
       if task_done:
         st.session_state.tasks[i]["completed"] = True

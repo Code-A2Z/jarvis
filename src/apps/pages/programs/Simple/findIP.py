@@ -1,6 +1,7 @@
-import streamlit as st
-import requests
 import pyperclip
+import requests
+import streamlit as st
+
 
 def get_ip(url):
   try:
@@ -10,11 +11,12 @@ def get_ip(url):
   except Exception as e:
     return f"Error: {e}"
 
+
 def findIP():
   st.title("🌏 Your Public IP Addresses")
 
-  ipv4 = get_ip('https://api.ipify.org?format=json')
-  ipv6 = get_ip('https://api64.ipify.org?format=json')
+  ipv4 = get_ip("https://api.ipify.org?format=json")
+  ipv6 = get_ip("https://api64.ipify.org?format=json")
 
   col1, col2 = st.columns(2)
   with col1:

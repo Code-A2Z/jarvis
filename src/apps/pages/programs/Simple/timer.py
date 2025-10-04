@@ -1,5 +1,7 @@
-import streamlit as st
 import time
+
+import streamlit as st
+
 
 def timer():
   st.info("This is a simple timer application.", icon="⏳")
@@ -16,12 +18,12 @@ def timer():
     countdown_time = hour * 3600 + minute * 60 + second
 
     timer_message = st.empty()
-    timer_message.info(f'Timer set for {hour} hours, {minute} minutes, and {second} seconds.', icon="🕒")
+    timer_message.info(f"Timer set for {hour} hours, {minute} minutes, and {second} seconds.", icon="🕒")
 
     while countdown_time:
       min, sec = divmod(countdown_time, 60)
       hour, min = divmod(min, 60)
-      timer_message.info(f'Timer set for {hour} hours, {min} minutes, and {sec} seconds.', icon="🕒")
+      timer_message.info(f"Timer set for {hour} hours, {min} minutes, and {sec} seconds.", icon="🕒")
       countdown_time -= 1
       time.sleep(1)
 

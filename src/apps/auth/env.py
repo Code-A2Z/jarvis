@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def displayStreamlitSecrets(data, prefix=""):
   for key, value in data.items():
     full_key = f"{prefix}{key}"
@@ -9,6 +10,7 @@ def displayStreamlitSecrets(data, prefix=""):
       displayStreamlitSecrets(value, prefix=full_key + "/")
     else:
       st.text_input(label=key, value=str(value), disabled=True, key=full_key)
+
 
 def env():
   st.title("Environment Variables")
@@ -23,5 +25,6 @@ def env():
     displayStreamlitSecrets(st.secrets)
   else:
     st.warning("You are not authorized to view the environment variables.", icon="⚠️")
+
 
 env()

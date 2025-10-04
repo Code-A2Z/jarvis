@@ -1,10 +1,11 @@
-import streamlit as st
 import importlib
 import random
 import re
 
-from src.helpers.getModules import getModules
+import streamlit as st
+
 from src.helpers.getFolders import getFolders
+from src.helpers.getModules import getModules
 
 icons = [
   ":material/api:",
@@ -26,12 +27,14 @@ icons = [
   ":material/share:",
 ]
 
+
 def formatTitle(name):
-  return re.sub(r'(?<!^)(?=[A-Z])', ' ', name)
+  return re.sub(r"(?<!^)(?=[A-Z])", " ", name)
+
 
 def createPageModule(BASE_DIR, MAIN_DIR, MODULES):
   st.title(formatTitle(MAIN_DIR))
-  choice = st.selectbox(f'Select a {BASE_DIR[:-1].lower()} to execute', [None] + list(MODULES.keys()), key=MAIN_DIR)
+  choice = st.selectbox(f"Select a {BASE_DIR[:-1].lower()} to execute", [None] + list(MODULES.keys()), key=MAIN_DIR)
   st.divider()
 
   if choice in MODULES:
@@ -49,7 +52,8 @@ def createPageModule(BASE_DIR, MAIN_DIR, MODULES):
     except Exception as e:
       st.error(f"An error occurred: {e}", icon="🚫")
   else:
-    st.info("Star this project on [GitHub](https://github.com/Code-A2Z/jarvis), if you like it!", icon='⭐')
+    st.info("Star this project on [GitHub](https://github.com/Code-A2Z/jarvis), if you like it!", icon="⭐")
+
 
 def structPages(path):
   folders = getFolders(path)
@@ -57,13 +61,16 @@ def structPages(path):
   for name, folder in folders.items():
     COMMON_MODULE_PATH = f"{path}/{folder}"
     MODULES = getModules(COMMON_MODULE_PATH)
+
+    page_path_name = path.split("/")[-1]
+
     if MODULES:
       pages.append(
         st.Page(
-          lambda path=path.split('/')[-1], folder=folder, MODULES=MODULES: createPageModule(path, folder, MODULES),
+          lambda path=page_path_name, folder=folder, MODULES=MODULES: createPageModule(path, folder, MODULES),
           title=name,
           icon=random.choice(icons),
-          url_path=folder
+          url_path=folder,
         )
       )
   return pages

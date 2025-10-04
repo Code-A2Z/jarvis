@@ -1,6 +1,7 @@
 from datetime import datetime
-import streamlit as st
+
 import pytz
+import streamlit as st
 
 cities = {
   "Auckland": "Pacific/Auckland",
@@ -34,13 +35,15 @@ cities = {
   "Denver": "America/Denver",
   "Los Angeles": "America/Los_Angeles",
   "San Francisco": "America/Los_Angeles",
-  "Vancouver": "America/Vancouver"
+  "Vancouver": "America/Vancouver",
 }
+
 
 def get_city_time(timezone):
   tz = pytz.timezone(timezone)
   city_time = datetime.now(tz)
-  return city_time.strftime('%H:%M:%S'), city_time.strftime('%A, %Y-%m-%d')
+  return city_time.strftime("%H:%M:%S"), city_time.strftime("%A, %Y-%m-%d")
+
 
 def worldClock():
   cols = st.columns(2)

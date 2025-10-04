@@ -1,5 +1,5 @@
-import streamlit as st
 import requests
+import streamlit as st
 
 BASE_URL = "https://api.jikan.moe/v4"
 ALL_GENRES = {
@@ -51,6 +51,7 @@ ALL_GENRES = {
   "Workplace": 48,
 }
 
+
 def top_animes():
   URL = f"{BASE_URL}/top/anime"
   try:
@@ -58,20 +59,20 @@ def top_animes():
     data = response.json()
     if response.status_code == 200:
       st.toast("Top 10 Animes", icon="✅")
-      for anime_details in data['data'][:10]:
+      for anime_details in data["data"][:10]:
         st.divider()
-        image = anime_details['images']['jpg']['large_image_url']
-        link_url = anime_details['url']
-        status = anime_details['status'] if anime_details['status'] else "--"
-        score = str(anime_details['score']) + "/10" if anime_details['score'] else "--"
-        synopsis = anime_details['synopsis'] if anime_details['synopsis'] else "--"
-        season = anime_details['season'] if anime_details['season'] else "--"
-        year = anime_details['year'] if anime_details['year'] else "--"
-        anime_genres = "Genre: " + ', '.join([genre_name['name'] for genre_name in anime_details['genres']])
+        image = anime_details["images"]["jpg"]["large_image_url"]
+        link_url = anime_details["url"]
+        status = anime_details["status"] if anime_details["status"] else "--"
+        score = str(anime_details["score"]) + "/10" if anime_details["score"] else "--"
+        synopsis = anime_details["synopsis"] if anime_details["synopsis"] else "--"
+        season = anime_details["season"] if anime_details["season"] else "--"
+        year = anime_details["year"] if anime_details["year"] else "--"
+        anime_genres = "Genre: " + ", ".join([genre_name["name"] for genre_name in anime_details["genres"]])
 
         col1, col2 = st.columns([1, 2])
         with col1:
-          st.image(image, caption=anime_details['title'])
+          st.image(image, caption=anime_details["title"])
         with col2:
           st.markdown(f"##### 😀 [{anime_details['title']}]({link_url})")
           st.write(f"{score} &nbsp; | &nbsp;  {year} &nbsp;  |  &nbsp; {season}")
@@ -84,6 +85,7 @@ def top_animes():
   except Exception as e:
     st.error(f"An unexpected error occurred: {e}", icon="🚨")
 
+
 def top_characters():
   URL = f"{BASE_URL}/top/characters"
   try:
@@ -91,13 +93,15 @@ def top_characters():
     data = response.json()
     if response.status_code == 200:
       st.toast("Top 10 Characters", icon="✅")
-      character_map = {character['name']: character for character in data['data'][:10] if character}
+      character_map = {character["name"]: character for character in data["data"][:10] if character}
       for character_name, character_details in character_map.items():
         st.divider()
-        image_url = character_details['images']['jpg']['image_url']
-        link_url = character_details['url']
-        about = character_details['about'] if character_details['about'] else "--"
-        nicknames = ', '.join([name for name in character_details['nicknames']] + [character_details['name_kanji']] if character_details['name_kanji'] else [])
+        image_url = character_details["images"]["jpg"]["image_url"]
+        link_url = character_details["url"]
+        about = character_details["about"] if character_details["about"] else "--"
+        nicknames = ", ".join(
+          [name for name in character_details["nicknames"]] + [character_details["name_kanji"]] if character_details["name_kanji"] else []
+        )
 
         col1, col2 = st.columns([1, 2])
         with col1:
@@ -112,29 +116,30 @@ def top_characters():
   except Exception as e:
     st.error(f"An unexpected error occurred: {e}", icon="🚨")
 
+
 def get_animes_by_genres(selected_genres, order, sort):
-  genres = ','.join([str(ALL_GENRES[genre]) for genre in selected_genres])
-  query = f'?genres={genres}&order_by={order}&sort={sort}'
+  genres = ",".join([str(ALL_GENRES[genre]) for genre in selected_genres])
+  query = f"?genres={genres}&order_by={order}&sort={sort}"
   URL = f"{BASE_URL}/anime{query}"
   try:
     response = requests.get(URL)
     data = response.json()
     if response.status_code == 200:
       st.toast("Anime By Genres", icon="✅")
-      for anime_details in data['data'][:10]:
+      for anime_details in data["data"][:10]:
         st.divider()
-        image = anime_details['images']['jpg']['large_image_url']
-        link_url = anime_details['url']
-        status = anime_details['status'] if anime_details['status'] else "--"
-        score = str(anime_details['score']) + "/10" if anime_details['score'] else "--"
-        synopsis = anime_details['synopsis'] if anime_details['synopsis'] else "--"
-        season = anime_details['season'] if anime_details['season'] else "--"
-        year = anime_details['year'] if anime_details['year'] else "--"
-        anime_genres = "Genre: " + ', '.join([genre_name['name'] for genre_name in anime_details['genres']])
+        image = anime_details["images"]["jpg"]["large_image_url"]
+        link_url = anime_details["url"]
+        status = anime_details["status"] if anime_details["status"] else "--"
+        score = str(anime_details["score"]) + "/10" if anime_details["score"] else "--"
+        synopsis = anime_details["synopsis"] if anime_details["synopsis"] else "--"
+        season = anime_details["season"] if anime_details["season"] else "--"
+        year = anime_details["year"] if anime_details["year"] else "--"
+        anime_genres = "Genre: " + ", ".join([genre_name["name"] for genre_name in anime_details["genres"]])
 
         col1, col2 = st.columns([1, 2])
         with col1:
-          st.image(image, caption=anime_details['title'])
+          st.image(image, caption=anime_details["title"])
         with col2:
           st.markdown(f"##### 👉 [{anime_details['title']}]({link_url})")
           st.write(f"{score} &nbsp; | &nbsp;  {year} &nbsp;  |  &nbsp; {season}")
@@ -147,6 +152,7 @@ def get_animes_by_genres(selected_genres, order, sort):
   except Exception as e:
     st.error(f"An unexpected error occurred: {e}", icon="🚨")
 
+
 def anime():
   option = st.selectbox("Select an option", options=["Animes by Genres", "Top Animes", "Top Characters"])
 
@@ -157,7 +163,7 @@ def anime():
   else:
     col1, col2, col3 = st.columns(3)
     with col1:
-      sort = st.selectbox("Select type" ,options=["desc", "asc"])
+      sort = st.selectbox("Select type", options=["desc", "asc"])
     with col2:
       order = st.selectbox("Select order", options=["score", "start_date", "end_date", "episodes", "rank", "popularity", "favorites"])
     with col3:

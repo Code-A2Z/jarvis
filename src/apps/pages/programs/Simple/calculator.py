@@ -1,7 +1,9 @@
 import streamlit as st
 
+
 def update_display(value):
   st.session_state.memory["display"] = value
+
 
 def on_button_click(button):
   memory = st.session_state.memory
@@ -12,9 +14,9 @@ def on_button_click(button):
       update_display(button)
       memory["awaiting_second_value"] = False
     elif memory["display"] == "0" or memory["display"] in operators:
-        update_display(button)
+      update_display(button)
     else:
-        update_display(memory["display"] + button)
+      update_display(memory["display"] + button)
 
   elif button in operators:
     if memory["awaiting_second_value"]:
@@ -54,8 +56,9 @@ def on_button_click(button):
         memory["operator"] = None
         memory["first_value"] = None
         memory["awaiting_second_value"] = False
-    except:
+    except Exception:
       update_display("Error")
+
 
 def calculator():
   if "memory" not in st.session_state:
@@ -78,7 +81,7 @@ def calculator():
 
   for row in buttons:
     cols = st.columns(4)
-    for col, button in zip(cols, row):
+    for col, button in zip(cols, row, strict=False):
       if col.button(button, key=f"btn_{button}", use_container_width=True):
-          on_button_click(button)
-          st.rerun()
+        on_button_click(button)
+        st.rerun()

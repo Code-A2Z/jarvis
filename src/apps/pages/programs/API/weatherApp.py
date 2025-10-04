@@ -1,9 +1,10 @@
-import streamlit as st
-import requests
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import requests
+import streamlit as st
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """### How to get your API Key:
 1. Visit [WeatherAPI.com](https://www.weatherapi.com/).
@@ -11,6 +12,7 @@ api_guide = """### How to get your API Key:
 3. Generate an API key from your account dashboard.
 4. Enter the API key in the input field.
 """
+
 
 def getWeather(api_key, city):
   try:
@@ -28,7 +30,7 @@ def getWeather(api_key, city):
         "condition": data["current"]["condition"]["text"],
         "icon": data["current"]["condition"]["icon"],
         "feels_like": data["current"]["feelslike_c"],
-        "last_updated": data["current"]["last_updated"]
+        "last_updated": data["current"]["last_updated"],
       }
       return weather, None
     else:
@@ -36,13 +38,14 @@ def getWeather(api_key, city):
   except Exception as e:
     return None, str(e)
 
+
 def weatherApp():
   exists = isKeyExist("WEATHER_API_KEY", "api_key")
   if not exists["WEATHER_API_KEY"]:
     showInstructions(markdown_text=api_guide, fields="WEATHER_API_KEY")
     st.stop()
 
-  api_key = (os.environ.get("WEATHER_API_KEY") or st.secrets['api_key']["WEATHER_API_KEY"])
+  api_key = os.environ.get("WEATHER_API_KEY") or st.secrets["api_key"]["WEATHER_API_KEY"]
   city = st.text_input("Enter City Name")
 
   if st.button("Get Weather") and city:

@@ -1,8 +1,8 @@
-import streamlit as st
 import requests
+import streamlit as st
 
-from src.helpers.displayInstructions import showInstructions
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 ### How to get your Wolfram Alpha API Key:
@@ -15,36 +15,40 @@ api_guide = """
 WOLFRAM_URL = "http://api.wolframalpha.com/v2/query"
 WOLFRAM_API_KEY = st.secrets["api_key"]["WOLFRAM_API_KEY"]
 
+
 def calculate_expression(query):
-  params = {'input': query, 'format': 'image,plaintext', 'output': 'JSON', 'appid': WOLFRAM_API_KEY}
+  params = {"input": query, "format": "image,plaintext", "output": "JSON", "appid": WOLFRAM_API_KEY}
   response = requests.get(WOLFRAM_URL, params=params)
   if response.status_code == 200:
     data = response.json()
-    if 'queryresult' in data and data['queryresult']['success']:
-      pods = data['queryresult']['pods']
+    if "queryresult" in data and data["queryresult"]["success"]:
+      pods = data["queryresult"]["pods"]
       return pods
     else:
-      st.error("No results found for the given input!", icon='🚨')
+      st.error("No results found for the given input!", icon="🚨")
       return None
   else:
-    st.error("Error fetching data from Wolfram Alpha", icon='🚨')
+    st.error("Error fetching data from Wolfram Alpha", icon="🚨")
     return None
+
 
 def display_plots(pods):
   for pod in pods:
-    if 'img' in pod['subpods'][0]:
-      image_url = pod['subpods'][0]['img']['src']
-      st.image(image_url, caption=pod['title'], use_container_width=True)
+    if "img" in pod["subpods"][0]:
+      image_url = pod["subpods"][0]["img"]["src"]
+      st.image(image_url, caption=pod["title"], use_container_width=True)
+
 
 def display_results(pods):
   if pods:
     for pod in pods:
-      st.subheader(pod['title'])
-      if 'plaintext' in pod['subpods'][0] and pod['subpods'][0]['plaintext']:
-        st.text(pod['subpods'][0]['plaintext'])
+      st.subheader(pod["title"])
+      if "plaintext" in pod["subpods"][0] and pod["subpods"][0]["plaintext"]:
+        st.text(pod["subpods"][0]["plaintext"])
     display_plots(pods)
   else:
-    st.error("No results found for the given input!", icon='🚨')
+    st.error("No results found for the given input!", icon="🚨")
+
 
 def wolframSolver():
   exists = isKeyExist("WOLFRAM_API_KEY", "api_key")

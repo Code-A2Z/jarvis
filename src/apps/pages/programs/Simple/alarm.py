@@ -1,6 +1,8 @@
-import streamlit as st
 import datetime
 import time
+
+import streamlit as st
+
 
 def alarm():
   col1, col2, col3 = st.columns(3)
@@ -24,16 +26,13 @@ def alarm():
 
   with col5:
     note_option = st.radio("Choose Note/Link Option", ("None", "Custom Note/Link"), key="note_opt")
-    if note_option == "Custom Note/Link":
-      alarm_note = st.text_area("Enter your link or note here", "", key="custom_note")
-    else:
-      alarm_note = "No note or link"
+    alarm_note = st.text_area("Enter your link or note here", "", key="custom_note") if note_option == "Custom Note/Link" else "No note or link"
 
   if st.button("Set Alarm"):
     now = datetime.datetime.now()
     alarm_dt = now.replace(hour=int(hour), minute=int(minute), second=int(second), microsecond=0)
     if alarm_dt <= now:
-      st.toast(f"(> {datetime.datetime.now().strftime("%H:%M:%S")}) Alarm time must be in the future.", icon="⚠️")
+      st.toast(f"(> {datetime.datetime.now().strftime('%H:%M:%S')}) Alarm time must be in the future.", icon="⚠️")
     elif (alarm_dt - now).total_seconds() > 3600:
       st.toast("Alarm time must be within the next hour.", icon="⚠️")
     else:

@@ -3,9 +3,9 @@ import streamlit.components.v1 as components
 
 
 def snakeGame():
-    st.title("Snake Game")
+  st.title("Snake Game")
 
-    game_html = """
+  game_html = """
     <!DOCTYPE html>
     <html>
     <head>
@@ -189,13 +189,16 @@ def snakeGame():
     </body>
     </html>
     """
-    
-    components.html(game_html, height=650)
 
-    st.markdown("""
+  components.html(game_html, height=650)
+
+  st.markdown(
+    """
     <style>
         .stMarkdown {
             text-align: center;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+  )

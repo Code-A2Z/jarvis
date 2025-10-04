@@ -1,9 +1,10 @@
 import streamlit as st
 
+
 def home():
   st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
   st.toast("Welcome to Jarvis!", icon="👋")
-  st.image('assets/image.gif', caption='Empower Your Digital Life with Jarvis', use_container_width=True)
+  st.image("assets/image.gif", caption="Empower Your Digital Life with Jarvis", use_container_width=True)
 
   st.markdown("""
   ## Key Features
@@ -16,7 +17,7 @@ def home():
   """)
 
   with st.expander("## See Jarvis in Action"):
-    st.video(f'https://www.youtube.com/watch?v={st.secrets["general"]["YOUTUBE_VIDEO_ID"]}', start_time=0)
+    st.video(f"https://www.youtube.com/watch?v={st.secrets['general']['YOUTUBE_VIDEO_ID']}", start_time=0)
 
   st.markdown("""
   ## Learn More and Get Started
@@ -31,5 +32,6 @@ def home():
   ---
   **Jarvis** is continually evolving with new features and improvements. Stay tuned for updates and feel free to contribute to its development.
   """)
+
 
 home()

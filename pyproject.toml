@@ -1,0 +1,63 @@
+[project]
+name = "jarvis"
+version = "0.1.0"
+description = "Jarvis is a powerful virtual AI assistant designed to simplify your daily tasks through voice command integration."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "authlib>=1.6.5",
+    "deep-translator>=1.11.4",
+    "deepface>=0.0.95",
+    "faiss-cpu>=1.12.0",
+    "google-generativeai>=0.8.5",
+    "groq>=0.32.0",
+    "kaggle>=1.7.4.5",
+    "langchain-community>=0.3.30",
+    "langchain-core>=0.3.78",
+    "langchain-google-genai>=2.0.10",
+    "langchain-groq>=0.3.8",
+    "langchain-text-splitters>=0.3.11",
+    "matplotlib>=3.10.6",
+    "mtcnn>=1.0.0",
+    "opencv-python-headless>=4.12.0.88",
+    "pint>=0.25",
+    "plotly>=6.3.1",
+    "pygame>=2.6.1",
+    "pymultidictionary>=1.3.2",
+    "pypdf>=6.1.1",
+    "pypdf2>=3.0.1",
+    "pyperclip>=1.11.0",
+    "pyshorteners>=1.0.1",
+    "python-barcode>=0.16.1",
+    "python-dotenv>=1.1.1",
+    "pytz>=2025.2",
+    "qrcode>=8.2",
+    "speedtest-cli>=2.1.3",
+    "spotipy>=2.25.1",
+    "streamlit>=1.50.0",
+    "tensorflow>=2.20.0",
+    "tf-keras>=2.20.1",
+    "transformers>=4.57.0",
+]
+
+[dependency-groups]
+lint = [
+    "ruff>=0.13.3",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "UP",
+    "B",
+    "SIM",
+    "I",
+]
+
+[tool.ruff.format]
+indent-style = "space"
+
+[tool.ruff]
+line-length = 150
+indent-width = 2

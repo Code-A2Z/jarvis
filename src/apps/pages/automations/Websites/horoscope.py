@@ -1,5 +1,5 @@
-import streamlit as st
 import requests
+import streamlit as st
 from bs4 import BeautifulSoup
 
 zodiac_signs = {
@@ -14,22 +14,24 @@ zodiac_signs = {
   "Sagittarius": 9,
   "Capricorn": 10,
   "Aquarius": 11,
-  "Pisces": 12
+  "Pisces": 12,
 }
+
 
 def get_horoscope_by_day(zodiac_sign: int, day: str):
   try:
-    if not "-" in day:
+    if "-" not in day:
       res = requests.get(f"https://www.horoscope.com/us/horoscopes/general/horoscope-general-daily-{day}.aspx?sign={zodiac_sign}")
     else:
       day = day.replace("-", "")
       res = requests.get(f"https://www.horoscope.com/us/horoscopes/general/horoscope-archive.aspx?sign={zodiac_sign}&laDate={day}")
 
-    soup = BeautifulSoup(res.content, 'html.parser')
-    data = soup.find('div', attrs={'class': 'main-horoscope'})
+    soup = BeautifulSoup(res.content, "html.parser")
+    data = soup.find("div", attrs={"class": "main-horoscope"})
     return data.p.text, None
   except Exception as e:
     return None, str(e)
+
 
 def horoscope():
   st.title("Daily Horoscope")

@@ -1,7 +1,7 @@
 import streamlit as st
 
-from src.helpers.structPages import structPages
 from src.helpers.getFolders import getFolders
+from src.helpers.structPages import structPages
 
 
 def application():
@@ -23,12 +23,15 @@ def application():
         pages[folder_name.title()] = structPages(f"{MAIN_DIR}/{folder_dir}")
 
     if st.user.email == st.secrets["general"]["ADMIN_EMAIL"] and st.user.given_name == st.secrets["general"]["ADMIN_NAME"]:
-      pages.update({
-        "Admin": [
-          st.Page("src/apps/auth/env.py", title="Environment Variables", icon=":material/security:"),
-        ]
-      })
+      pages.update(
+        {
+          "Admin": [
+            st.Page("src/apps/auth/env.py", title="Environment Variables", icon=":material/security:"),
+          ]
+        }
+      )
 
   return st.navigation(pages)
+
 
 application().run()

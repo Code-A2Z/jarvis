@@ -1,5 +1,6 @@
-import streamlit as st
 import math
+
+import streamlit as st
 
 MATH_CONTEXT = {
   "sin": math.sin,
@@ -17,12 +18,14 @@ MATH_CONTEXT = {
   "tanh": math.tanh,
 }
 
+
 def evaluate_expression(expr):
   try:
     result = eval(expr, {"__builtins__": None}, MATH_CONTEXT)
     st.success(f"Result: {result}", icon="✅")
   except Exception as e:
     st.error(f"Error: {str(e)}", icon="🚫")
+
 
 def scientificCalculator():
   st.toast("""

@@ -4,17 +4,43 @@ from pint import UnitRegistry
 UNIT_TYPES = {
   "Length": ["meter", "kilometer", "centimeter", "millimeter", "micrometer", "nanometer", "mile", "yard", "foot", "inch", "lightyear"],
   "Temperature": ["Celsius", "Kelvin", "Fahrenheit"],
-  "Area": ["square meter", "square kilometer", "square centimeter", "square millimeter", "hectare", "square mile", "square yard", "square foot", "square inch", "acre"],
-  "Volume": ["cubic meter", "cubic kilometer", "cubic centimeter", "cubic millimeter", "liter", "milliliter", "gallon", "quart", "pint", "cup", "fluid ounce", "tablespoon", "teaspoon", "cubic mile", "cubic yard", "cubic foot", "cubic inch"],
+  "Area": [
+    "square meter",
+    "square kilometer",
+    "square centimeter",
+    "square millimeter",
+    "hectare",
+    "square mile",
+    "square yard",
+    "square foot",
+    "square inch",
+    "acre",
+  ],
+  "Volume": [
+    "cubic meter",
+    "cubic kilometer",
+    "cubic centimeter",
+    "cubic millimeter",
+    "liter",
+    "milliliter",
+    "gallon",
+    "quart",
+    "pint",
+    "cup",
+    "fluid ounce",
+    "tablespoon",
+    "teaspoon",
+    "cubic mile",
+    "cubic yard",
+    "cubic foot",
+    "cubic inch",
+  ],
   "Weight": ["kilogram", "gram", "milligram", "pound", "ounce", "carat"],
-  "Time": ["second", "millisecond", "microsecond", "nanosecond", "minute", "hour", "day", "week", "month", "year"]
+  "Time": ["second", "millisecond", "microsecond", "nanosecond", "minute", "hour", "day", "week", "month", "year"],
 }
 
-UNIT_MAPPING = {
-  "Celsius": "degree_Celsius",
-  "Fahrenheit": "degree_Fahrenheit",
-  "Kelvin": "kelvin"
-}
+UNIT_MAPPING = {"Celsius": "degree_Celsius", "Fahrenheit": "degree_Fahrenheit", "Kelvin": "kelvin"}
+
 
 def convert_units(value, from_unit, to_unit):
   convertor = UnitRegistry().Quantity
@@ -26,6 +52,7 @@ def convert_units(value, from_unit, to_unit):
     return result.magnitude, result.units
   except Exception as e:
     return None, str(e)
+
 
 def unitsConvertor():
   col1, col2 = st.columns(2)

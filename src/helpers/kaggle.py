@@ -1,7 +1,9 @@
-import streamlit as st
 import os
 
+import streamlit as st
+
 from src.helpers.checkKeyExist import isKeyExist
+
 
 @st.cache_resource(ttl=86400)
 def downloadNotebookOutput(username, notebook_name, folder_name, version=None):
@@ -20,14 +22,15 @@ def downloadNotebookOutput(username, notebook_name, folder_name, version=None):
   Raises:
     Streamlit error and stops execution if Kaggle credentials are missing.
   """
-  exists = isKeyExist(['KAGGLE_USERNAME', 'KAGGLE_KEY'], 'kaggle')
-  if not exists['KAGGLE_USERNAME'] or not exists['KAGGLE_KEY']:
+  exists = isKeyExist(["KAGGLE_USERNAME", "KAGGLE_KEY"], "kaggle")
+  if not exists["KAGGLE_USERNAME"] or not exists["KAGGLE_KEY"]:
     st.error("Kaggle credentials are missing. Please set them in Streamlit secrets.", icon="🚨")
     st.stop()
-  os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
-  os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+  os.environ["KAGGLE_USERNAME"] = st.secrets["kaggle"]["KAGGLE_USERNAME"]
+  os.environ["KAGGLE_KEY"] = st.secrets["kaggle"]["KAGGLE_KEY"]
   version_arg = f"--version {version}" if version else ""
   os.system(f"kaggle kernels output {username}/{notebook_name} -p {folder_name} {version_arg}")
+
 
 @st.cache_resource(ttl=86400)
 def downloadDataset(dataset_name, version=None):
@@ -45,11 +48,11 @@ def downloadDataset(dataset_name, version=None):
   Raises:
     Streamlit error and stops execution if Kaggle credentials are missing.
   """
-  exists = isKeyExist(['KAGGLE_USERNAME', 'KAGGLE_KEY'], 'kaggle')
-  if not exists['KAGGLE_USERNAME'] or not exists['KAGGLE_KEY']:
+  exists = isKeyExist(["KAGGLE_USERNAME", "KAGGLE_KEY"], "kaggle")
+  if not exists["KAGGLE_USERNAME"] or not exists["KAGGLE_KEY"]:
     st.error("Kaggle credentials are missing. Please set them in Streamlit secrets.", icon="🚨")
     st.stop()
-  os.environ['KAGGLE_USERNAME'] = st.secrets['kaggle']['KAGGLE_USERNAME']
-  os.environ['KAGGLE_KEY'] = st.secrets['kaggle']['KAGGLE_KEY']
+  os.environ["KAGGLE_USERNAME"] = st.secrets["kaggle"]["KAGGLE_USERNAME"]
+  os.environ["KAGGLE_KEY"] = st.secrets["kaggle"]["KAGGLE_KEY"]
   version_arg = f"--version {version}" if version else ""
   os.system(f"kaggle datasets download -d {dataset_name} {version_arg}")

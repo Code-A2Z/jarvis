@@ -1,6 +1,8 @@
-import streamlit as st
-import qrcode
 import io
+
+import qrcode
+import streamlit as st
+
 
 def QRCodeGenerator():
   input_data = st.text_area("Enter data for the QR Code (text, link, number, etc.)")
@@ -21,11 +23,6 @@ def QRCodeGenerator():
       byte_im = buf.getvalue()
 
       st.image(byte_im, caption="Generated QR Code")
-      st.download_button(
-        label="Download QR Code",
-        data=byte_im,
-        file_name="qr_code.png",
-        mime="image/png"
-      )
+      st.download_button(label="Download QR Code", data=byte_im, file_name="qr_code.png", mime="image/png")
     else:
       st.toast("Please enter some data to generate the QR code.", icon="⚠️")

@@ -1,9 +1,10 @@
-import streamlit as st
 import speedtest
+import streamlit as st
+
 
 def internetSpeedTest():
   if st.button("🏃‍➡️ Run Speed Test"):
-    sp_test = speedtest.Speedtest()  
+    sp_test = speedtest.Speedtest()
     sp_test.get_best_server()
     download_speed = sp_test.download() / 1000000
     upload_speed = sp_test.upload() / 1000000

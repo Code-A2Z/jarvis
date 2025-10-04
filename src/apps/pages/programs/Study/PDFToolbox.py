@@ -1,17 +1,19 @@
-import streamlit as st
 import PyPDF2
+import streamlit as st
+
 
 def readPDF():
   file = st.file_uploader("Upload a PDF file", type=["pdf"])
   if file:
     reader = PyPDF2.PdfReader(file)
     numPage = st.number_input("From which page to start reading?", format="%d", min_value=1, max_value=len(reader.pages))
-    page = reader.pages[numPage-1]
+    page = reader.pages[numPage - 1]
     text = page.extract_text()
     if text:
       st.write(text)
     else:
       st.warning("No text found on this page", icon="⚠️")
+
 
 def mergePDF():
   uploaded_files = st.file_uploader("Upload PDF files to merge", type=["pdf"], accept_multiple_files=True)
@@ -28,6 +30,7 @@ def mergePDF():
     with open(output_pdf, "rb") as f:
       st.download_button("Download Merged PDF", f, file_name="merged_output.pdf")
 
+
 def splitPDF():
   file = st.file_uploader("Upload a PDF file to split", type=["pdf"])
   if file:
@@ -42,6 +45,7 @@ def splitPDF():
       pdf_writer.write(f)
     with open(output_pdf, "rb") as f:
       st.download_button("Download Split PDF", f, file_name="split_output.pdf")
+
 
 def rotatePDF():
   file = st.file_uploader("Upload a PDF file to rotate", type=["pdf"])
@@ -59,10 +63,11 @@ def rotatePDF():
     with open(output_file, "rb") as f:
       st.download_button("Download Rotated PDF", f, file_name=output_file)
 
+
 def encryptPDF():
   password = st.text_input("Enter password", type="password", placeholder="your encryption password")
   file = st.file_uploader("Upload a PDF file to encrypt", type=["pdf"])
-  if st.button('Encrypt PDF') and password:
+  if st.button("Encrypt PDF") and password:
     pdf_reader = PyPDF2.PdfReader(file)
     pdf_writer = PyPDF2.PdfWriter()
     for page in pdf_reader.pages:
@@ -74,10 +79,11 @@ def encryptPDF():
     with open(output_pdf, "rb") as f:
       st.download_button("Download Encrypted PDF", f, file_name="encrypted_output.pdf")
 
+
 def decryptPDF():
   password = st.text_input("Enter password to decrypt", type="password", placeholder="your decryption password")
   file = st.file_uploader("Upload an encrypted PDF file to decrypt", type=["pdf"])
-  if st.button('Decrypt PDF') and password and file:
+  if st.button("Decrypt PDF") and password and file:
     pdf_reader = PyPDF2.PdfReader(file)
     if pdf_reader.decrypt(password):
       pdf_writer = PyPDF2.PdfWriter()
@@ -90,6 +96,7 @@ def decryptPDF():
         st.download_button("Download Decrypted PDF", f, file_name="decrypted_output.pdf")
     else:
       st.error("Incorrect password", icon="🚫")
+
 
 def PDFToolbox():
   choice = st.selectbox("Choose an operation", ["Read PDF", "Merge PDF", "Split PDF", "Rotate PDF", "Encrypt PDF", "Decrypt PDF"])

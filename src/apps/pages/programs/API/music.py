@@ -1,10 +1,11 @@
-from spotipy.oauth2 import SpotifyClientCredentials
-import streamlit as st
-import spotipy
 import os
 
-from src.helpers.displayInstructions import showInstructions
+import spotipy
+import streamlit as st
+from spotipy.oauth2 import SpotifyClientCredentials
+
 from src.helpers.checkKeyExist import isKeyExist
+from src.helpers.displayInstructions import showInstructions
 
 api_guide = """
 ### How to get your Spotify Client ID and Secret:
@@ -14,6 +15,7 @@ api_guide = """
 4. Copy the Client ID and Client Secret from the app's settings.
 5. Enter the Client ID and Client Secret in the input fields below.
 """
+
 
 def authenticateSpotify():
   client_id = os.environ.get("SPOTIFY_CLIENT_ID") or st.secrets["spotify"]["SPOTIFY_CLIENT_ID"]
@@ -25,49 +27,49 @@ def authenticateSpotify():
     return sp
   return None
 
+
 def fetchMusicData(sp, search_query, search_type, limits):
-  if search_type == 'track':
-    results = sp.search(q=search_query, type='track', limit=limits)
-    return results['tracks']['items']
-  elif search_type == 'artist':
-    results = sp.search(q=search_query, type='artist', limit=limits)
-    return results['artists']['items']
-  elif search_type == 'album':
-    results = sp.search(q=search_query, type='album', limit=limits)
-    return results['albums']['items']
+  if search_type == "track":
+    results = sp.search(q=search_query, type="track", limit=limits)
+    return results["tracks"]["items"]
+  elif search_type == "artist":
+    results = sp.search(q=search_query, type="artist", limit=limits)
+    return results["artists"]["items"]
+  elif search_type == "album":
+    results = sp.search(q=search_query, type="album", limit=limits)
+    return results["albums"]["items"]
+
 
 def displayResults(results, search_type):
-  if search_type == 'track':
+  if search_type == "track":
     for track in results:
       col1, col2 = st.columns(2)
       with col1:
         st.image(track["album"]["images"][0]["url"], caption=track["name"])
-      with col2:
-        with st.expander("Track Details", expanded=True):
-          st.markdown(f"##### Artist: {track['artists'][0]['name']}")
-          st.markdown(f"##### Album: {track['album']['name']}")
-          st.markdown(f"##### Release Date: {track['album']['release_date']}")
+      with col2, st.expander("Track Details", expanded=True):
+        st.markdown(f"##### Artist: {track['artists'][0]['name']}")
+        st.markdown(f"##### Album: {track['album']['name']}")
+        st.markdown(f"##### Release Date: {track['album']['release_date']}")
       st.divider()
-  elif search_type == 'album':
+  elif search_type == "album":
     for album in results:
       col1, col2 = st.columns(2)
       with col1:
         st.image(album["images"][0]["url"], caption=album["name"])
-      with col2:
-        with st.expander("Album Details", expanded=True):
-          st.markdown(f"##### Artist: {album['artists'][0]['name']}")
-          st.markdown(f"##### Release Date: {album['release_date']}")
+      with col2, st.expander("Album Details", expanded=True):
+        st.markdown(f"##### Artist: {album['artists'][0]['name']}")
+        st.markdown(f"##### Release Date: {album['release_date']}")
       st.divider()
-  elif search_type == 'artist':
+  elif search_type == "artist":
     for artist in results:
       col1, col2 = st.columns(2)
       with col1:
         st.image(artist["images"][0]["url"], caption=artist["name"])
-      with col2:
-        with st.expander("Artist Details", expanded=True):
-          st.markdown(f"##### Followers: {artist['followers']['total']}")
-          st.markdown(f"##### Genres: {', '.join(artist['genres'])}")
+      with col2, st.expander("Artist Details", expanded=True):
+        st.markdown(f"##### Followers: {artist['followers']['total']}")
+        st.markdown(f"##### Genres: {', '.join(artist['genres'])}")
       st.divider()
+
 
 def music():
   exists = isKeyExist(["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET"], "spotify")

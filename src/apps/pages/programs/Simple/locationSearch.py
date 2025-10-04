@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def fetch_location_from_ip(ip_address):
   url = f"http://ip-api.com/json/{ip_address}"
@@ -18,6 +19,7 @@ def fetch_location_from_ip(ip_address):
       "Timezone": data.get("timezone", "N/A"),
     }
   return None
+
 
 def locationSearch():
   st.info("Enter an IP address to find its location.", icon="ℹ️")

@@ -1,18 +1,21 @@
-import streamlit as st
 import random
 import string
 
+import streamlit as st
+
+
 def generate_password(length, upper, lower, digits, special):
   chars = (
-    (string.ascii_uppercase if upper else '') +
-    (string.ascii_lowercase if lower else '') +
-    (string.digits if digits else '') +
-    (string.punctuation if special else '')
+    (string.ascii_uppercase if upper else "")
+    + (string.ascii_lowercase if lower else "")
+    + (string.digits if digits else "")
+    + (string.punctuation if special else "")
   )
   if not chars:
     st.error("Please select at least one character type!", icon="🚨")
     return ""
-  return ''.join(random.choice(chars) for _ in range(length))
+  return "".join(random.choice(chars) for _ in range(length))
+
 
 def passwordGenerator():
   length = st.slider("Password length", min_value=4, max_value=30, value=8)

@@ -1,5 +1,6 @@
-import streamlit as st
 import requests
+import streamlit as st
+
 
 def get_exchange_rates():
   url = "https://api.frankfurter.app/currencies"
@@ -9,6 +10,7 @@ def get_exchange_rates():
   else:
     return {}
 
+
 def convert_currency(amount, from_currency, to_currency):
   url = f"https://api.frankfurter.app/latest?amount={amount}&from={from_currency}&to={to_currency}"
   response = requests.get(url)
@@ -16,6 +18,7 @@ def convert_currency(amount, from_currency, to_currency):
     return response.json()
   else:
     return {}
+
 
 def currencyConvertor():
   currencies = get_exchange_rates()
