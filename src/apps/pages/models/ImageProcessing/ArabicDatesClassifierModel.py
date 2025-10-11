@@ -1,10 +1,10 @@
+import io
+import numpy as np
+from PIL import Image
 import streamlit as st
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
-from PIL import Image
-import io
-import numpy as np
 
 
 # PAGE CONFIG
