@@ -6,24 +6,21 @@ from PIL import Image
 import io
 import numpy as np
 
-# --------------------------------------------------
+
 # PAGE CONFIG
-# --------------------------------------------------
 st.set_page_config(
-    page_title="🍈 Arabic Dates Classifier",
+    page_title="Arabic Dates Classifier",
     page_icon="🍈",
     layout="centered"
 )
 
-st.title("🍈 Arabic Dates Classification using Deep Learning (PyTorch)")
+st.title("Arabic Dates Classification")
 st.markdown(
-    "Upload an image of **Arabic Dates**, and the trained ResNet50 model "
-    "will classify it into one of the 9 date varieties from the Arabian region."
+    "This pretrained model will classify an image of **Arabic Dates** into one of the 9 date varieties from the Arabian region."
 )
 
-# --------------------------------------------------
+
 # MODEL LOADING
-# --------------------------------------------------
 MODEL_PATH = "assets/arabic_dates_model.pth"
 @st.cache_resource
 def load_model():
@@ -43,9 +40,8 @@ def load_model():
 
 model, CLASS_NAMES = load_model()
 
-# --------------------------------------------------
-# IMAGE PREPROCESSING
-# --------------------------------------------------
+
+# IMAGE PREPROCESSING & PREDICTION
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -57,9 +53,6 @@ def preprocess_image(image: Image.Image):
     image = image.convert("RGB")
     return transform(image).unsqueeze(0)
 
-# --------------------------------------------------
-# PREDICTION FUNCTION
-# --------------------------------------------------
 def predict(model, image_tensor, class_names):
     with torch.no_grad():
         outputs = model(image_tensor)
@@ -70,9 +63,8 @@ def predict(model, image_tensor, class_names):
     sorted_labels = [class_names[i] for i in sorted_indices]
     return sorted_labels, sorted_probs
 
-# --------------------------------------------------
+
 # FILE UPLOAD SECTION
-# --------------------------------------------------
 uploaded_file = st.file_uploader("📸 Upload an image of Arabic Dates", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
@@ -89,7 +81,6 @@ if uploaded_file is not None:
 
     st.markdown(f"### ✅ Predicted Class: **{top_class}** ({top_prob:.2f}% confidence)")
 
-    # Show all probabilities
     prob_dict = {labels[i]: float(probs[i] * 100) for i in range(len(labels))}
     st.write("#### 📊 Probability Distribution:")
     st.bar_chart(prob_dict)
@@ -97,7 +88,6 @@ if uploaded_file is not None:
 else:
     st.info("👆 Upload a clear image of dates to classify.")
 
-# --------------------------------------------------
+
 # FOOTER
-# --------------------------------------------------
 st.caption("Trained with ResNet50 on Arabian Dates Dataset — 9 classes")
