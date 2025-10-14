@@ -1,6 +1,8 @@
 <h2>Hey <𝚌𝚘𝚍𝚎𝚛𝚜/>! 👋</h2>
 
+
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Monoton&size=85&pause=12&speed=12&color=00FF00&center=true&vCenter=true&width=2000&height=200&lines=Hello+World!;Meet+Jarvis+-+Your+AI+Assistant!;Enhance+Productivity+with+AI!;Automate.+Assist.+Achieve!;Voice+Commands+at+Your+Fingertips!;AI+Driven+Efficiency!;Build+Smarter,+Work+Faster!;Innovate+with+Machine+Learning!)](https://git.io/typing-svg)
+
 
 <div align="center">
   <p>
@@ -193,3 +195,5 @@
 </div>
 
 <a href="#top"><img src="https://img.shields.io/badge/⬆-Back%20to%20Top-red?style=for-the-badge" align="right"/></a>
+
+
