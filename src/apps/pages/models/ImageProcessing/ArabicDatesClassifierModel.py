@@ -7,18 +7,10 @@ import torch.nn as nn
 from torchvision import models, transforms
 
 
-# PAGE CONFIG
-st.set_page_config(
-    page_title="Arabic Dates Classifier",
-    page_icon="🍈",
-    layout="centered"
-)
-
 st.title("Arabic Dates Classification")
 st.markdown(
     "This pretrained model will classify an image of **Arabic Dates** into one of the 9 date varieties from the Arabian region."
 )
-
 
 # MODEL LOADING
 MODEL_PATH = "assets/arabic_dates_model.pth"
