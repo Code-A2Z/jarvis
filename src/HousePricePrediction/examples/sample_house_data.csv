@@ -1,0 +1,6 @@
+LotArea,OverallQual,YearBuilt,TotalBsmtSF,GrLivArea,FullBath,BedroomAbvGr,SalePrice
+8450,7,2003,856,1710,2,3,208500
+9600,6,1976,1262,1262,2,3,181500
+11250,7,2001,920,1786,2,3,223500
+9550,7,2017,700,1050,2,3,150000
+... (Add 15-20 synthetic rows)
