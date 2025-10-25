@@ -3,6 +3,7 @@ deepface
 deep-translator
 faiss-cpu
 google-generativeai
+google-auth-oauthlib
 groq
 kaggle
 langchain_community
