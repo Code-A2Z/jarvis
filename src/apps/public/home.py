@@ -1,10 +1,20 @@
+from PIL import Image
 import streamlit as st
+
+
+@st.cache_resource
+def load_image():
+    return Image.open("assets/image.gif")
 
 
 def home():
   st.title("Welcome to Jarvis - Your Virtual AI Assistant!")
   st.toast("Welcome to Jarvis!", icon="👋")
-  st.image("assets/image.gif", caption="Empower Your Digital Life with Jarvis", use_container_width=True)
+  st.image(
+    load_image(),
+    caption="Empower Your Digital Life with Jarvis",
+    use_container_width=True,
+  )
 
   st.markdown("""
   ## Key Features
